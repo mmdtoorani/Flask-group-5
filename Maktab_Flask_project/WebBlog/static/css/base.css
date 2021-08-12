@@ -15,6 +15,7 @@ body {
 .navs-button {
     margin-right: 25px;
     background-color: #60a1e0;
+    margin-top: 10px;
 }
 
 .search > button {
