@@ -1,3 +1,7 @@
+body {
+    background-color: rgba(96, 161, 224, 0.18);
+}
+
 .nav {
     position: fixed;
     display: flex;
@@ -11,6 +15,7 @@
 .navs-button {
     margin-right: 25px;
     background-color: #60a1e0;
+    margin-top: 10px;
 }
 
 .search > button {
@@ -30,13 +35,13 @@
     max-height:55px;
 }
 .main-container{
-    height:1000px;
+    height:auto;
     background-color: rgba(96, 161, 224, 0.18);
 }
 
 .footer {
     position: fixed;
-    height: 100px;
+    height: 60px;
     bottom: 0;
     width: 100%;
     background-color: #233c55;

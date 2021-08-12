@@ -1,5 +1,5 @@
 include LICENSE.rst
-graft magahazam/static
-graft magahazam/templates
+graft Maktab_Flask_project/static
+graft Maktab_Flask_project/templates
 graft tests
 global-exclude *.pyc
