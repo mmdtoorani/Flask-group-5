@@ -1,3 +1,3 @@
 
 #desc
-this project will start soon...
+this project will start soon.   ..
