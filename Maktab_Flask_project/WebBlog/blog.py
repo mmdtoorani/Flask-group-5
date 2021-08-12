@@ -5,7 +5,7 @@ blog_bp = Blueprint('blog', __name__)
 
 @blog_bp.route('/')
 def home():
-    return render_template('signup.html')
+    return render_template('base.html')
 
 
 @blog_bp.route("/login/")
