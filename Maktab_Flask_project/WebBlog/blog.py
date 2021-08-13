@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, redirect, flash, session
+from flask import Blueprint, render_template, request, url_for, redirect, flash
 
 from WebBlog.db import User
 
@@ -12,11 +12,16 @@ def home():
         username_form = request.form["username"]
         password_form = request.form["password"]
         error = None
+        if User.objects(username=username_form):
+            user = User.objects(username=username_form)[0]
+            if (str(hash(password_form)) != user.password):
+                error = "Incorrect password."
 
 
 @blog_bp.route("/login/", methods=("GET", "POST"))
 def login():
     return render_template("login.html")
+
 
 @blog_bp.route("/signup/", methods=("GET", "POST"))
 def sign_up():
