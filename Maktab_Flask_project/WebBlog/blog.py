@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, url_for, redirect, flash
 
 from WebBlog.db import User
 
@@ -43,5 +43,7 @@ def sign_up():
             user_created.save()
 
             return redirect(url_for("blog.login"))
+
+        flash(error)
 
 
