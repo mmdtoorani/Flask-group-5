@@ -22,5 +22,8 @@ def sign_up():
     if request.method == "POST":
         username_form = request.form["username"]
         first_name_form = request.form["first_name"]
+        last_name_form = request.form["first_name"]
+        email_form = request.form["first_name"]
+        phone_form = request.form["phone"]
 
 
