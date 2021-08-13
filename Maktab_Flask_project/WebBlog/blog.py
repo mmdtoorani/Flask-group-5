@@ -8,7 +8,9 @@ blog_bp = Blueprint('blog', __name__)
 @blog_bp.route('/')
 @blog_bp.route('/home')
 def home():
-    return render_template('base.html')
+    if request.method == "POST":
+        username_form = request.form["username"]
+        password_form = request.form["password"]
 
 
 @blog_bp.route("/login/", methods=("GET", "POST"))
