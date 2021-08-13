@@ -30,3 +30,6 @@ def sign_up():
 
         elif not password_form:
             error = "Password is required."
+
+        elif User.objects(username=username_form):
+            error = f"User {username_form} is already registered."
