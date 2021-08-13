@@ -8,6 +8,11 @@ blog_bp = Blueprint('blog', __name__)
 @blog_bp.route('/')
 @blog_bp.route('/home')
 def home():
+    return render_template("base.html")
+
+
+@blog_bp.route("/login/", methods=("GET", "POST"))
+def login():
     if request.method == "POST":
         username_form = request.form["username"]
         password_form = request.form["password"]
@@ -24,11 +29,6 @@ def home():
             return redirect(url_for("blog.home"))
 
         flash(error)
-    return render_template("login.html")
-
-
-@blog_bp.route("/login/", methods=("GET", "POST"))
-def login():
     return render_template("login.html")
 
 
