@@ -11,6 +11,7 @@ def home():
     if request.method == "POST":
         username_form = request.form["username"]
         password_form = request.form["password"]
+        error = None
 
 
 @blog_bp.route("/login/", methods=("GET", "POST"))
