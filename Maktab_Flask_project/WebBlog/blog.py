@@ -39,11 +39,10 @@ def sign_up():
         if error is None:
             user_created = User(username=username_form, email=email_form, first_name=first_name_form,
                                 last_name=last_name_form,
-                                phone_number=phone_form, password = password_form)
+                                phone_number=phone_form, password=password_form)
             user_created.save()
 
             return redirect(url_for("blog.login"))
 
         flash(error)
     return render_template('signup.html')
-
