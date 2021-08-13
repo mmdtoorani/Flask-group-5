@@ -45,5 +45,5 @@ def sign_up():
             return redirect(url_for("blog.login"))
 
         flash(error)
-
+    return render_template('signup.html')
 
