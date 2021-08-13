@@ -27,3 +27,6 @@ def sign_up():
 
         if not username_form:
             error = "Username is required."
+
+        elif not password_form:
+            error = "Password is required."
