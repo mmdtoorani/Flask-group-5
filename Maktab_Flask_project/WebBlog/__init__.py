@@ -6,7 +6,6 @@ def create_app():
     app.logger.debug(f'app.instance_path = {app.instance_path}')
     app.config.from_mapping(
         SECRET_KEY='.jHETCR4ER*@V{/'
-
     )
     
     from .blog import blog_bp
