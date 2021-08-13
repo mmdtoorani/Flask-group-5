@@ -16,6 +16,12 @@ def home():
             user = User.objects(username=username_form)[0]
             if (str(hash(password_form)) != user.password):
                 error = "Incorrect password."
+        else:
+            error = "Incorrect username."
+        if error is None:
+            session.clear()
+            session['username'] = request.form['username']
+            return redirect(url_for("blog.home"))
 
 
 @blog_bp.route("/login/", methods=("GET", "POST"))
