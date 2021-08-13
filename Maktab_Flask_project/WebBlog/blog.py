@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, url_for, redirect, flash, session
+from werkzeug.security import check_password_hash
 
 from WebBlog.db import User
 
@@ -6,15 +7,29 @@ blog_bp = Blueprint('blog', __name__)
 
 
 @blog_bp.route('/')
-@blog_bp.route('/home')
+@blog_bp.route('/home', methods=("GET", "POST"))
 def home():
     return render_template('base.html')
 
 
 @blog_bp.route("/login/")
 def login():
-
-    return render_template('login.html')
+    if request.method == "POST":
+        username_form = request.form["username"]
+        password_form = request.form["password"]
+        error = None
+        user = User.objects(username=username_form)
+        if user is None:
+            error = "Incorrect username."
+        elif not check_password_hash(user.password, password_form):
+            error = "Incorrect password."
+        if error is None:
+            # store the user id in a new session and return to the index
+            session.clear()
+            session["user_id"] = user.id
+            return redirect(url_for("base.html"))
+            flash(error)
+    return render_template("login.html")
 
 
 @blog_bp.route("/signup/", methods=("GET", "POST"))
