@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, url_for, redirect, flash
+from flask import Blueprint, render_template, request, url_for, redirect, flash, session
 
 from WebBlog.db import User
 
@@ -22,6 +22,9 @@ def home():
             session.clear()
             session['username'] = request.form['username']
             return redirect(url_for("blog.home"))
+
+        flash(error)
+    return render_template("login.html")
 
 
 @blog_bp.route("/login/", methods=("GET", "POST"))
