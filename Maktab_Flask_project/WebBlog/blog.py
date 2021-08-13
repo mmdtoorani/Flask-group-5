@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash
 
 from WebBlog.db import *
 
+
 blog_bp = Blueprint('blog', __name__)
 
 
@@ -18,32 +19,6 @@ def login():
 
 @blog_bp.route("/signup/", methods=("GET", "POST"))
 def sign_up():
-    if request.method == "POST":
-        username_form = request.form["username"]
-        first_name_form = request.form["first_name"]
-        last_name_form = request.form["first_name"]
-        email_form = request.form["first_name"]
-        phone_form = request.form["phone"]
-        password_form = request.form["password"]
-        error = None
-
-        if not username_form:
-            error = "Username is required."
-        elif not password_form:
-            error = "Password is required."
-        elif User.objects(username=username_form):
-            error = f"User {username_form} is already registered."
-
-        if error is None:
-            user_created = User(username=username_form, email=email_form, first_name=first_name_form,
-                                last_name=last_name_form,
-                                phone_number=phone_form)
-            user_created.save()
-
-            return redirect(url_for("blog.login"))
-
-        flash(error)
-
     return render_template('signup.html')
 
 
