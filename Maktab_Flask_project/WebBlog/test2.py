@@ -24,7 +24,7 @@ def sign_up():
         last_name_form = request.form["first_name"]
         email_form = request.form["first_name"]
         phone_form = request.form["phone"]
-        password_form = request.form["password"]
+        password_form = hash(request.form["password"])
         error = None
 
         if not username_form:

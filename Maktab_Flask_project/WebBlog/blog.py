@@ -19,6 +19,8 @@ def login():
 
 @blog_bp.route("/signup/", methods=("GET", "POST"))
 def sign_up():
-    return render_template('signup.html')
+    if request.method == "POST":
+        username_form = request.form["username"]
+        first_name_form = request.form["first_name"]
 
 
