@@ -1,7 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-
-from WebBlog.db import *
-
+from flask import Blueprint, render_template, request
 
 blog_bp = Blueprint('blog', __name__)
 
@@ -28,4 +25,5 @@ def sign_up():
         password_form = hash(request.form["password"])
         error = None
 
-
+        if not username_form:
+            error = "Username is required."
