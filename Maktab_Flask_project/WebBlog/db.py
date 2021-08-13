@@ -9,3 +9,8 @@ class User(DynamicDocument):
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
     phone_number = StringField(max_length=50)
+
+
+
+
+
