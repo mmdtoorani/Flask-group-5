@@ -26,3 +26,6 @@ class Post(DynamicDocument):
     title = StringField(max_length=50)
     body = StringField(max_length=250)
     status = IntField()
+    photo = FileField()
+    likes = ListField()
+    dislikes = ListField()
