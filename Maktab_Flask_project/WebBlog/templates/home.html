@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    WebBlog | Home
+{% endblock %}
+
+{% block left_items_in_nav %}
+    <a href="{{ url_for('blog.home') }}">
+        <button type="button" class="btn navs-button">Home</button>
+    </a>
+    <a href="{{ url_for('blog.login') }}">
+        <button type="button" class="btn navs-button">Login</button>
+    </a>
+    <a href="{{ url_for('blog.sign_up') }}">
+        <button type="button" class="btn navs-button">Sign up</button>
+    </a>
+    <a href="#">
+        <button type="button" class="btn navs-button">Logout</button>
+    </a>
+{% endblock %}
+
+{% block right_items_in_nav %}
+
+    <form class="form-inline search">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn my-2 my-sm-0" type="button">Search</button>
+    </form>
+
+{% endblock %}

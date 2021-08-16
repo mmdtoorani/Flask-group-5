@@ -8,7 +8,7 @@ blog_bp = Blueprint('blog', __name__)
 @blog_bp.route('/')
 @blog_bp.route('/home')
 def home():
-    return render_template("base.html")
+    return render_template("home.html")
 
 
 @blog_bp.route("/login/", methods=("GET", "POST"))
@@ -19,7 +19,7 @@ def login():
         error = None
         if User.objects(username=username_form):
             user = User.objects(username=username_form)[0]
-            if (str(hash(password_form)) != user.password):
+            if str(hash(password_form)) != user.password:
                 error = "Incorrect password."
         else:
             error = "Incorrect username."
