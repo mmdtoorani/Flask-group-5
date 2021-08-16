@@ -1,6 +1,10 @@
-from flask import Blueprint, render_template, request, url_for, redirect, flash, session
+import functools
 
-from WebBlog.db import User
+from flask import Blueprint, render_template, request, url_for, redirect, flash, session, g
+from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+
+from WebBlog.db import User, Post
 
 blog_bp = Blueprint('blog', __name__)
 
