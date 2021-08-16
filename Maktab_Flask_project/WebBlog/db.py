@@ -21,7 +21,6 @@ class User(DynamicDocument):
     password = StringField(max_length=50)
 
 
-
 class Post(DynamicDocument):
     title = StringField(max_length=50)
     body = StringField(max_length=250)
@@ -32,7 +31,6 @@ class Post(DynamicDocument):
     user = ReferenceField('User', reverse_delete_rule=CASCADE)
     cat = ReferenceField('Category', reverse_delete_rule=CASCADE)
     tags = ListField()
-
 
 
 # how to add a picture in mongoengine
