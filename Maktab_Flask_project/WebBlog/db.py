@@ -8,4 +8,5 @@ class Category(DynamicDocument):
     parent_cat = ReferenceField('self', required=False)
 
 
-
+class Tag(DynamicDocument):
+    name = StringField(max_length=50)
