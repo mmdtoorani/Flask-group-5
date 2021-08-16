@@ -32,3 +32,16 @@ class Post(DynamicDocument):
     user = ReferenceField('User', reverse_delete_rule=CASCADE)
     cat = ReferenceField('Category', reverse_delete_rule=CASCADE)
     tags = ListField()
+
+
+
+# how to add a picture in mongoengine
+# class Animal(Document):
+#     genus = StringField()
+#     family = StringField()
+#     photo = FileField()
+#
+# marmot = Animal(genus='Marmota', family='Sciuridae'
+# with open('marmot.jpg', 'rb') as fd:
+#     marmot.photo.put(fd, content_type = 'image/jpeg')
+# marmot.save()
