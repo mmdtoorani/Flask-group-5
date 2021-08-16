@@ -29,3 +29,6 @@ class Post(DynamicDocument):
     photo = FileField()
     likes = ListField()
     dislikes = ListField()
+    user = ReferenceField('User', reverse_delete_rule=CASCADE)
+    cat = ReferenceField('Category', reverse_delete_rule=CASCADE)
+    tags = ListField()
