@@ -8,6 +8,14 @@ from WebBlog.db import User, Post
 
 blog_bp = Blueprint('blog', __name__)
 
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for("blog.login"))
+
+
+
 
 @blog_bp.route('/')
 @blog_bp.route('/home')
