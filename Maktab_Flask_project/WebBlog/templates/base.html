@@ -10,34 +10,23 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/base.css') }}">
     <link rel="stylesheet" href="{% block css_href %}{% endblock %}">
     <title>{% block title %}{% endblock %}</title>
+    {% block style %}{% endblock %}
     {% block extra_head %}{% endblock %}
 </head>
 <body>
 <div class="main-container">
     <div class="header">
         <nav class="container-fluid nav">
-            <div class="left-items-in-nav">
 
-                <a href="{{ url_for('blog.home') }}">
-                    <button type="button" class="btn navs-button">Home</button>
-                </a>
-                <a href="{{ url_for('blog.login') }}">
-                    <button type="button" class="btn navs-button">Login</button>
-                </a>
-                <a href="{{ url_for('blog.sign_up') }}">
-                    <button type="button" class="btn navs-button">Sign up</button>
-                </a>
-                <a href="#">
-                    <button type="button" class="btn navs-button">Logout</button>
-                </a>
+
+            <div class="left_items_in_nav">
+                {% block left_items_in_nav %}{% endblock %}
             </div>
+
             <div class="right-items-in-nav">
-                <form class="form-inline search">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn my-2 my-sm-0" type="button">Search</button>
-                </form>
+                {% block right_items_in_nav %}{% endblock %}
                 <div class="logo-container">
-                    <a href="#">
+                    <a href="{{ url_for('blog.home') }}">
                         <img src="{{ url_for('static', filename='/img/W.png') }}" class="navbar-logo" alt="w logo">
                     </a>
                 </div>
