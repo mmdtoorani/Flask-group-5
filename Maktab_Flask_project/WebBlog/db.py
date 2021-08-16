@@ -10,3 +10,9 @@ class Category(DynamicDocument):
 
 class Tag(DynamicDocument):
     name = StringField(max_length=50)
+
+
+class User(DynamicDocument):
+    username = StringField(max_length=50)
+    email = StringField(max_length=50, required=False)
+    first_name = StringField(max_length=50)
