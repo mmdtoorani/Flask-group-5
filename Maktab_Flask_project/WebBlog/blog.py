@@ -8,6 +8,31 @@ from WebBlog.db import User, Post
 
 blog_bp = Blueprint('blog', __name__)
 
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for("blog.login"))
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
+@blog_bp.before_app_request
+def load_logged_in_user():
+    user_id = session.get("user_id")
+
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.objects(id=user_id)[0]
+
+
+@blog_bp.route('/')
+@blog_bp.route('/home')
+def home():
+    return render_template("home.html")
 
 
 @blog_bp.route('/')
@@ -68,6 +93,11 @@ def sign_up():
 
         flash(error)
     return render_template('signup.html')
+
+@blog_bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("blog.home"))
 
 
 
