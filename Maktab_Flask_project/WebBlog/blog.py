@@ -65,7 +65,7 @@ def sign_up():
         last_name_form = request.form["first_name"]
         email_form = request.form["first_name"]
         phone_form = request.form["phone"]
-        password_form = str(hash(request.form["password"]))
+        password_form = request.form["password"]
         error = None
 
         if not username_form:
@@ -80,7 +80,7 @@ def sign_up():
         if error is None:
             user_created = User(username=username_form, email=email_form, first_name=first_name_form,
                                 last_name=last_name_form,
-                                phone_number=phone_form, password=password_form)
+                                phone_number=phone_form, password=generate_password_hash(password_form))
             user_created.save()
 
             return redirect(url_for("blog.login"))
