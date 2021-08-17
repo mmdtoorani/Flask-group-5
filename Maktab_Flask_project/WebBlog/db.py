@@ -63,5 +63,4 @@ class Post(DynamicDocument):
 # with open('marmot.jpg', 'rb') as fd:
 #     marmot.photo.put(fd, content_type = 'image/jpeg')
 # marmot.save()
-# for user in User.objects:
-#     print(user.id)
+
