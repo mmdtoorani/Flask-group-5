@@ -26,6 +26,13 @@
                 <a href="{{ url_for('blog.login') }}">
                     <button type="button" class="btn navs-button">Login</button>
                 </a>
+                <a href="{{ url_for('blog.sign_up') }}">
+                    <button type="button" class="btn navs-button">Sign up</button>
+                </a>
+                <a href="{{ url_for('blog.logout') }}">
+                    <button type="button" class="btn navs-button">Logout</button>
+                </a>
+
 
                 {% block left_items_in_nav %}{% endblock %}
             </div>
