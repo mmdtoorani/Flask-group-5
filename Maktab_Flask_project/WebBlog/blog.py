@@ -102,3 +102,5 @@ def create():
         f.save('WebBlog/static/' + fname)
         image = fname
         error = None
+        if not title_form:
+            error = "Title is required."
