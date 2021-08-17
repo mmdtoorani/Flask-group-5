@@ -93,3 +93,12 @@ def sign_up():
 @blog_bp.route("/create", methods=("GET", "POST"))
 def create():
     """Create a new post for the current user."""
+    if request.method == "POST":
+        title_form = request.form["title"]
+        body_form = request.form["body"]
+        user_id_form = session['user_id']
+        f = request.files.get('image')
+        fname = secure_filename(f.filename)
+        f.save('WebBlog/static/' + fname)
+        image = fname
+        error = None
