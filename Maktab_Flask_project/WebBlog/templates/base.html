@@ -18,7 +18,6 @@
     <div class="header">
         <nav class="container-fluid nav">
 
-
             <div class="left_items_in_nav">
                 <a href="{{ url_for('blog.home') }}">
                     <button type="button" class="btn navs-button">Home</button>
@@ -32,8 +31,6 @@
                 <a href="{{ url_for('blog.logout') }}">
                     <button type="button" class="btn navs-button">Logout</button>
                 </a>
-
-
                 {% block left_items_in_nav %}{% endblock %}
             </div>
 
