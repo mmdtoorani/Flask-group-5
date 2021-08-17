@@ -87,3 +87,9 @@ def sign_up():
 
         flash(error)
     return render_template('signup.html')
+
+
+@login_required
+@blog_bp.route("/create", methods=("GET", "POST"))
+def create():
+    """Create a new post for the current user."""
