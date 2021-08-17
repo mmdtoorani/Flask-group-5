@@ -50,7 +50,7 @@ def login():
             error = "Incorrect username."
         if error is None:
             session.clear()
-            session['username'] = request.form['username']
+            session["user_id"] = str(user.id)
             return redirect(url_for("blog.home"))
 
         flash(error)
