@@ -45,10 +45,10 @@ def login():
         error = None
         if User.objects(username=username_form):
             user = User.objects(username=username_form)[0]
-            print('hello2')
+
             if check_password_hash(user.password, password_form):
                 error = "Incorrect password."
-                print('hello3')
+
         else:
             error = "Incorrect username."
             print('hello4')
