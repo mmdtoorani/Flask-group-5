@@ -8,6 +8,7 @@ from WebBlog.db import User, Post
 
 blog_bp = Blueprint('blog', __name__)
 
+
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
@@ -27,7 +28,6 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = User.objects(id=user_id)[0]
-
 
 
 @blog_bp.route('/')
@@ -106,3 +106,9 @@ def create():
             error = "Title is required."
         if error is not None:
             flash(error)
+        else:
+            post_created = Post(title=title_form, body=body_form, user=User.objects(id=user_id_form)[0], photo=image)
+            post_created.save()
+            return redirect(url_for("blog.home"))
+
+    return render_template("create.html")
