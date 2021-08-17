@@ -30,7 +30,6 @@ def load_logged_in_user():
         g.user = User.objects(id=user_id)[0]
 
 
-@blog_bp.route('/')
 @blog_bp.route('/home')
 def home():
     return render_template("home.html")
@@ -38,19 +37,24 @@ def home():
 
 @blog_bp.route("/login/", methods=("GET", "POST"))
 def login():
+    print('hello4')
     if request.method == "POST":
+        print('hello3')
         username_form = request.form["username"]
         password_form = request.form["password"]
         error = None
         if User.objects(username=username_form):
             user = User.objects(username=username_form)[0]
+            print('hello7')
             if check_password_hash(user.password, password_form):
+                print('hello5')
                 error = "Incorrect password."
         else:
             error = "Incorrect username."
         if error is None:
             session.clear()
             session["user_id"] = str(user.id)
+            print('hello1')
             return redirect(url_for("blog.home"))
 
         flash(error)
@@ -65,7 +69,7 @@ def sign_up():
         last_name_form = request.form["first_name"]
         email_form = request.form["first_name"]
         phone_form = request.form["phone"]
-        password_form = request.form["password"]
+        password_form = str(hash(request.form["password"]))
         error = None
 
         if not username_form:
@@ -112,7 +116,6 @@ def create():
             return redirect(url_for("blog.home"))
 
     return render_template("create.html")
-
 
 
 @blog_bp.route("/logout")
