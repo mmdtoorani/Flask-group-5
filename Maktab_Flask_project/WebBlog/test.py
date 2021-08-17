@@ -198,11 +198,6 @@ class Post(DynamicDocument):
 # for user in User.objects:
 #     print(user.id)
 
-print(User.objects(username='oo')[0].password)
-print(str(User.objects(username='oo')[0].password))
-print(str(hash('oo')))
-print(hash('oo'))
-
 
 
 #########################################################################################
