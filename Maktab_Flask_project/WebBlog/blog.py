@@ -112,3 +112,10 @@ def create():
             return redirect(url_for("blog.home"))
 
     return render_template("create.html")
+
+
+
+@blog_bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("blog.home"))
