@@ -104,3 +104,5 @@ def create():
         error = None
         if not title_form:
             error = "Title is required."
+        if error is not None:
+            flash(error)
