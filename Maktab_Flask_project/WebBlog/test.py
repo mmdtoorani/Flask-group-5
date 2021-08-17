@@ -275,7 +275,7 @@ class Post(DynamicDocument):
 {% extends 'base.html' %}
 
 
-<h1>New Post</h1>
+
 
 
 {% block main %}
