@@ -24,7 +24,6 @@ def home():
     return render_template("home.html")
 
 
-
 @blog_bp.route("/signup/", methods=("GET", "POST"))
 def sign_up():
     if request.method == "POST":
@@ -88,4 +87,16 @@ def logout():
     return redirect(url_for("blog.home"))
 
 
+@blog_bp.route("/post/<post_id>/")
+def post():
+    pass
 
+
+@blog_bp.route("/category-posts/<category_id>/")
+def category():
+    pass
+
+
+@blog_bp.route("/tag-posts/<tag_id>")
+def tag():
+    pass
