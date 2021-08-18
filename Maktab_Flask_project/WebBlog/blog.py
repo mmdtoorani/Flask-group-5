@@ -32,7 +32,7 @@ def sign_up():
         last_name_form = request.form["first_name"]
         email_form = request.form["first_name"]
         phone_form = request.form["phone"]
-        password_form = str(hash(request.form["password"]))
+        password_form = request.form["password"]
         error = None
 
         if not username_form:
@@ -67,7 +67,7 @@ def login():
         error = None
         if User.objects(username=username_form):
             current_user = User.objects(username=username_form)[0]
-            if check_password_hash(current_user.password, password_form):
+            if not check_password_hash(current_user.password, password_form):
                 error = "Incorrect password."
         else:
             error = "Incorrect username."

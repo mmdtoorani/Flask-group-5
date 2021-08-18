@@ -40,8 +40,9 @@ def create():
 @user_bp.route("/posts-list/")
 def posts_list():
     """Show all of post that created by the current user."""
-
-    return render_template("posts_list.html")
+    current_users_post = User.objects(id=session["user_id"])[0]
+    posts = Post.objects(user=current_users_post)
+    return render_template("posts_list.html", posts=posts)
 
 
 @user_bp.route("/profile/")

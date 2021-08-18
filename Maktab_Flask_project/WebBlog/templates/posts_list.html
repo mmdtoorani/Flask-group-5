@@ -4,6 +4,40 @@
     WebBlog | MY POSTS
 {% endblock %}
 
-{% block main %}
+{% block style %}
+    <style>
+        .component > div {
+            margin-top: 79px;
+            align-content: center;
+            align-self: center;
+        }
 
+        .card {
+            margin: 4px auto auto;
+        }
+    </style>
+{% endblock %}
+
+{% block right_items_in_nav %}
+    <form class="form-inline search">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn my-2 my-sm-0" type="button">Search</button>
+    </form>
+{% endblock %}
+
+{% block main %}
+    {% for post in posts %}
+        <div class="container main-content">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ url_for('static', filename='' + post.photo) }}" alt="{{ post.photo }}">
+                <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body }}</p>
+                    <a href="#" class="btn add" title="add" id="{{ post.id }}">ADD</a>
+                    <a href="#" class="btn edit" title="edit" id="{{ post.id }}">EDIT</a>
+                    <a href="#" class="btn delete" title="delete" id="{{ post.id }}">DELETE</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
