@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, url_for, redirect, flash, session, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from WebBlog.db import User, Post
+from WebBlog.db import User, Post, Tag, Category
 from WebBlog.LoginRequired import login_required
 
 user_bp = Blueprint('user', __name__)
@@ -42,7 +42,6 @@ def posts_list():
     pass
 
 
-@user_bp.route("/edit-post/<post_id>")
+@user_bp.route("/edit-post/<post_id>/")
 def edit():
     pass
-
