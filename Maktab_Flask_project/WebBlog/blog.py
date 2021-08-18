@@ -24,27 +24,6 @@ def home():
     return render_template("home.html")
 
 
-@blog_bp.route("/login/", methods=("GET", "POST"))
-def login():
-    if request.method == "POST":
-        username_form = request.form["username"]
-        password_form = request.form["password"]
-        error = None
-        if User.objects(username=username_form):
-            user = User.objects(username=username_form)[0]
-            if check_password_hash(user.password, password_form):
-                error = "Incorrect password."
-        else:
-            error = "Incorrect username."
-        if error is None:
-            session.clear()
-            session["user_id"] = str(user.id)
-            print('hello1')
-            return redirect(url_for("blog.home"))
-
-        flash(error)
-    return render_template("login.html")
-
 
 @blog_bp.route("/signup/", methods=("GET", "POST"))
 def sign_up():
@@ -72,13 +51,35 @@ def sign_up():
                                 first_name=first_name_form,
                                 last_name=last_name_form,
                                 phone_number=phone_form,
-                                password=password_form)
+                                password=generate_password_hash(password_form))
             user_created.save()
 
             return redirect(url_for("blog.login"))
 
         flash(error)
     return render_template('signup.html')
+
+
+@blog_bp.route("/login/", methods=("GET", "POST"))
+def login():
+    if request.method == "POST":
+        username_form = request.form["username"]
+        password_form = request.form["password"]
+        error = None
+        if User.objects(username=username_form):
+            user = User.objects(username=username_form)[0]
+            if check_password_hash(user.password, password_form):
+                error = "Incorrect password."
+        else:
+            error = "Incorrect username."
+        if error is None:
+            session.clear()
+            session["user_id"] = str(user.id)
+            print('hello1')
+            return redirect(url_for("blog.home"))
+
+        flash(error)
+    return render_template("login.html")
 
 
 @blog_bp.route("/logout")

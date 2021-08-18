@@ -18,14 +18,14 @@ class User(DynamicDocument):
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
     phone_number = StringField(max_length=50)
-    password = StringField(max_length=50)
+    password = StringField(max_length=250)
 
 
 class Post(DynamicDocument):
     title = StringField(max_length=50)
     body = StringField(max_length=250)
     status = IntField()
-    photo = FileField()
+    photo = StringField(max_length=250)
     likes = ListField()
     dislikes = ListField()
     user = ReferenceField('User', reverse_delete_rule=CASCADE)
