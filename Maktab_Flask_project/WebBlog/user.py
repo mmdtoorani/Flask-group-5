@@ -30,3 +30,19 @@ def create():
             return redirect(url_for("blog.home"))
 
     return render_template("create.html")
+
+
+@user_bp.route("/profile/")
+def profile():
+    pass
+
+
+@user_bp.route("/posts-list/")
+def posts_list():
+    pass
+
+
+@user_bp.route("/edit-post/<post_id>")
+def edit():
+    pass
+
