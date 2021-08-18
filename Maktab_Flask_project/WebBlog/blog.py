@@ -1,22 +1,11 @@
-import functools
 
 from flask import Blueprint, render_template, request, url_for, redirect, flash, session, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-
 from WebBlog.db import User, Post
+from WebBlog.LoginRequired import login_required
 
 blog_bp = Blueprint('blog', __name__)
-
-def login_required(view):
-    @functools.wraps(view)
-    def wrapped_view(**kwargs):
-        if g.user is None:
-            return redirect(url_for("blog.login"))
-
-        return view(**kwargs)
-
-    return wrapped_view
 
 
 @blog_bp.before_app_request
@@ -27,8 +16,6 @@ def load_logged_in_user():
         g.user = None
     else:
         g.user = User.objects(id=user_id)[0]
-
-
 
 
 @blog_bp.route('/')
@@ -90,6 +77,7 @@ def sign_up():
         flash(error)
     return render_template('signup.html')
 
+
 @login_required
 @blog_bp.route("/create", methods=("GET", "POST"))
 def create():
@@ -113,6 +101,7 @@ def create():
             return redirect(url_for("blog.home"))
 
     return render_template("create.html")
+
 
 @blog_bp.route("/logout")
 def logout():
