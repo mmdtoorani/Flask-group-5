@@ -66,14 +66,15 @@ def login():
         password_form = request.form["password"]
         error = None
         if User.objects(username=username_form):
-            user = User.objects(username=username_form)[0]
-            if check_password_hash(user.password, password_form):
+            current_user = User.objects(username=username_form)[0]
+            if check_password_hash(current_user.password, password_form):
                 error = "Incorrect password."
         else:
             error = "Incorrect username."
+
         if error is None:
             session.clear()
-            session["user_id"] = str(user.id)
+            session["user_id"] = str(current_user.id)
             print('hello1')
             return redirect(url_for("blog.home"))
 
@@ -87,12 +88,12 @@ def logout():
     return redirect(url_for("blog.home"))
 
 
-@blog_bp.route("/post/<post_id>/")
+@blog_bp.route("/post/<post_id>")
 def post():
     pass
 
 
-@blog_bp.route("/category-posts/<category_id>/")
+@blog_bp.route("/category-posts/<category_id>")
 def category():
     pass
 

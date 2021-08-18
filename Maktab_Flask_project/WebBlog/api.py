@@ -8,7 +8,7 @@ def list_post():
     pass
 
 
-@api_bp.route("/post-delete/<post_id>/")
+@api_bp.route("/post-delete/<post_id>")
 def post_delete():
     pass
 
@@ -33,6 +33,6 @@ def search():
     pass
 
 
-@user_bp.route("/user-profile/<user_id>/")
+@user_bp.route("/user-profile/<user_id>")
 def user_profile():
     pass

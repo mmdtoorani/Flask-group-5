@@ -25,11 +25,23 @@ def create():
         if error is not None:
             flash(error)
         else:
-            post_created = Post(title=title_form, body=body_form, user=User.objects(id=user_id_form)[0], photo=image)
+            post_created = Post(
+                title=title_form,
+                body=body_form,
+                user=User.objects(id=user_id_form)[0],
+                photo=image
+            )
             post_created.save()
             return redirect(url_for("blog.home"))
 
     return render_template("create.html")
+
+
+@user_bp.route("/posts-list/")
+def posts_list():
+    """Show all of post that created by the current user."""
+
+    return render_template("posts_list.html")
 
 
 @user_bp.route("/profile/")
@@ -37,11 +49,6 @@ def profile():
     pass
 
 
-@user_bp.route("/posts-list/")
-def posts_list():
-    pass
-
-
-@user_bp.route("/edit-post/<post_id>/")
+@user_bp.route("/edit-post/<post_id>")
 def edit():
     pass

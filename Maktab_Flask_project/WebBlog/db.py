@@ -33,7 +33,6 @@ class Post(DynamicDocument):
     tags = ListField()
 
 
-
 # how to add a picture in mongoengine
 # class Animal(Document):
 #     genus = StringField()
