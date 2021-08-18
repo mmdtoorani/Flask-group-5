@@ -9,4 +9,3 @@ def login_required(view):
             return redirect(url_for("blog.login"))
         return view(**kwargs)
     return wrapped_view
-
