@@ -1,11 +1,40 @@
 {% extends 'base.html' %}
 
+
+{% block title %}
+    WebBlog | MY Profile
+{% endblock %}
+
+{% block style %}
+    <style>
+        .component > div {
+            margin-top: 79px;
+            align-content: center;
+            align-self: center;
+        }
+
+        .card {
+            margin: 4px auto auto;
+        }
+    </style>
+{% endblock %}
+
+{% block right_items_in_nav %}
+    <form class="form-inline search">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn my-2 my-sm-0" type="button">Search</button>
+    </form>
+{% endblock %}
+
 {% block main %}
     <div class="container main-content">
         <div class="card" style="width: 18rem;" id="card{{ user.id }}">
             <div class="card-body">
-                <h5 class="card-title">{{ user.username }}</h5>
-                <p class="card-text">{{ user.first_name }}</p>
+                <h5 class="card-title">your info</h5>
+                <p class="card-text">username : {{ user.username }}</p>
+                <p class="card-text">first name : {{ user.first_name }}</p>
+                <p class="card-text">last name : {{ user.last_name }}</p>
+                <p class="card-text">last name : {{ user.email }}</p>
 
 
 
