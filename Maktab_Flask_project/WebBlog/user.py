@@ -47,7 +47,8 @@ def posts_list():
 
 @user_bp.route("/profile/")
 def profile():
-
+    current_user= User.objects(id=session["user_id"])[0]
+    return render_template("posts_list.html", user=current_user)
 
 
 @user_bp.route("/edit-post/<post_id>")
