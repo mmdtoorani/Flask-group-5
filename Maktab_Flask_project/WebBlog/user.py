@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, request, url_for, redirect, flash, session, g
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Blueprint, render_template, request, url_for, redirect, flash, session
 from werkzeug.utils import secure_filename
-from WebBlog.db import User, Post, Tag, Category
+
 from WebBlog.LoginRequired import login_required
+from WebBlog.db import User, Post
 
 user_bp = Blueprint('user', __name__)
 
@@ -47,8 +47,8 @@ def posts_list():
 
 @user_bp.route("/profile/")
 def profile():
-    current_user= User.objects(id=session["user_id"])[0]
-    return render_template("posts_list.html", user=current_user)
+    current_user = User.objects(id=session["user_id"])[0]
+    return render_template("profile.html", user=current_user)
 
 
 @user_bp.route("/edit-post/<post_id>")
