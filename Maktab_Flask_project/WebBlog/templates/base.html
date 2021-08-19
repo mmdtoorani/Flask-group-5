@@ -9,6 +9,13 @@
           crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='/css/base.css') }}">
     <link rel="stylesheet" href="{% block css_href %}{% endblock %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
     <title>{% block title %}{% endblock %}</title>
     {% block style %}{% endblock %}
     {% block extra_head %}{% endblock %}
@@ -18,8 +25,19 @@
     <div class="header">
         <nav class="container-fluid nav">
 
-
             <div class="left_items_in_nav">
+                <a href="{{ url_for('blog.home') }}">
+                    <button type="button" class="btn navs-button">Home</button>
+                </a>
+                <a href="{{ url_for('blog.login') }}">
+                    <button type="button" class="btn navs-button">Login</button>
+                </a>
+                <a href="{{ url_for('blog.sign_up') }}">
+                    <button type="button" class="btn navs-button">Sign up</button>
+                </a>
+                <a href="{{ url_for('blog.logout') }}">
+                    <button type="button" class="btn navs-button">Logout</button>
+                </a>
                 {% block left_items_in_nav %}{% endblock %}
             </div>
 

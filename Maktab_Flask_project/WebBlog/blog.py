@@ -1,35 +1,27 @@
-from flask import Blueprint, render_template, request, url_for, redirect, flash, session
 
-from WebBlog.db import User
+from flask import Blueprint, render_template, request, url_for, redirect, flash, session, g
+from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+from WebBlog.db import User, Post
+from WebBlog.LoginRequired import login_required
 
 blog_bp = Blueprint('blog', __name__)
+
+
+@blog_bp.before_app_request
+def load_logged_in_user():
+    user_id = session.get("user_id")
+
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.objects(id=user_id)[0]
 
 
 @blog_bp.route('/')
 @blog_bp.route('/home')
 def home():
     return render_template("home.html")
-
-
-@blog_bp.route("/login/", methods=("GET", "POST"))
-def login():
-    if request.method == "POST":
-        username_form = request.form["username"]
-        password_form = request.form["password"]
-        error = None
-        if User.objects(username=username_form):
-            user = User.objects(username=username_form)[0]
-            if str(hash(password_form)) != user.password:
-                error = "Incorrect password."
-        else:
-            error = "Incorrect username."
-        if error is None:
-            session.clear()
-            session['username'] = request.form['username']
-            return redirect(url_for("blog.home"))
-
-        flash(error)
-    return render_template("login.html")
 
 
 @blog_bp.route("/signup/", methods=("GET", "POST"))
@@ -40,7 +32,7 @@ def sign_up():
         last_name_form = request.form["first_name"]
         email_form = request.form["first_name"]
         phone_form = request.form["phone"]
-        password_form = str(hash(request.form["password"]))
+        password_form = request.form["password"]
         error = None
 
         if not username_form:
@@ -53,12 +45,59 @@ def sign_up():
             error = f"User {username_form} is already registered."
 
         if error is None:
-            user_created = User(username=username_form, email=email_form, first_name=first_name_form,
+            user_created = User(username=username_form,
+                                email=email_form,
+                                first_name=first_name_form,
                                 last_name=last_name_form,
-                                phone_number=phone_form, password=password_form)
+                                phone_number=phone_form,
+                                password=generate_password_hash(password_form))
             user_created.save()
 
             return redirect(url_for("blog.login"))
 
         flash(error)
     return render_template('signup.html')
+
+
+@blog_bp.route("/login/", methods=("GET", "POST"))
+def login():
+    if request.method == "POST":
+        username_form = request.form["username"]
+        password_form = request.form["password"]
+        error = None
+        if User.objects(username=username_form):
+            current_user = User.objects(username=username_form)[0]
+            if not check_password_hash(current_user.password, password_form):
+                error = "Incorrect password."
+        else:
+            error = "Incorrect username."
+
+        if error is None:
+            session.clear()
+            session["user_id"] = str(current_user.id)
+            print('hello1')
+            return redirect(url_for("blog.home"))
+
+        flash(error)
+    return render_template("login.html")
+
+
+@blog_bp.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("blog.home"))
+
+
+@blog_bp.route("/post/<post_id>")
+def post():
+    pass
+
+
+@blog_bp.route("/category-posts/<category_id>")
+def category():
+    pass
+
+
+@blog_bp.route("/tag-posts/<tag_id>")
+def tag():
+    pass
