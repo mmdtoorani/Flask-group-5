@@ -67,3 +67,5 @@ class Post(DynamicDocument):
 # print(cat2.id)
 # print(post1.tags)
 # print(post1.likes)
+
+
