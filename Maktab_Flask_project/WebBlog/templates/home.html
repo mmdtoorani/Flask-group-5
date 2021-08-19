@@ -15,6 +15,11 @@
         <button type="button" class="btn navs-button">My Posts</button>
     </a>
     {% endif %}
+    {% if g.user %}
+        <a href="{{ url_for('user.profile') }}">
+        <button type="button" class="btn navs-button">My Profile</button>
+    </a>
+    {% endif %}
 
 {% endblock %}
 

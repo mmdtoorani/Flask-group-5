@@ -47,7 +47,7 @@ def posts_list():
 
 @user_bp.route("/profile/")
 def profile():
-    pass
+
 
 
 @user_bp.route("/edit-post/<post_id>")
