@@ -39,7 +39,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
-                    <a href="#" class="btn add" title="add" id="add{{ post.id }}">ADD</a>
+                    <a href="#" class="btn add" onclick="DeleteFunction('{{ post.id }}')" title="add" id="add{{ post.id }}">DEACTIVE</a>
                     <a href="#" class="btn edit" title="edit" id="{{ post.id }}">EDIT</a>
                     <a href="#" class="btn-delete" onclick="DeleteFunction('{{ post.id }}')" title="delete" id="{{ post.id }}">DELETE</a>
 
