@@ -24,7 +24,7 @@ def list_post():
 
 @api_bp.route("/post-delete/<post_id>")
 def post_delete(post_id):
-    return Post.objects(name=_id).delete()
+    return Post.objects(id=post_id).delete()
 
 
 @api_bp.route("/post-deactive/<post_id>")
