@@ -23,12 +23,12 @@ def list_post():
 
 
 @api_bp.route("/post-delete/<post_id>")
-def post_delete():
-    pass
+def post_delete(post_id):
+    return Post.objects(name=_id).delete()
 
 
 @api_bp.route("/post-deactive/<post_id>")
-def post_deactive():
+def post_deactive(post_id):
     pass
 
 
@@ -48,5 +48,5 @@ def search():
 
 
 @api_bp.route("/user-profile/<user_id>")
-def user_profile():
+def user_profile(user_id):
     pass
