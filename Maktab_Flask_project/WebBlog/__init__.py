@@ -10,7 +10,9 @@ def create_app():
     
     from .blog import blog_bp
     from .user import user_bp
+    from .api import api_bp
     app.register_blueprint(blog_bp)
     app.register_blueprint(user_bp)
+    app.register_blueprint(api_bp)
 
     return app
