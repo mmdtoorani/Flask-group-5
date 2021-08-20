@@ -1,9 +1,10 @@
-
 from flask import Blueprint, render_template, request, url_for, redirect, flash, session, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from WebBlog.db import User, Post
 from WebBlog.LoginRequired import login_required
+from api import list_post
+import requests
 
 blog_bp = Blueprint('blog', __name__)
 
@@ -21,7 +22,8 @@ def load_logged_in_user():
 @blog_bp.route('/')
 @blog_bp.route('/home')
 def home():
-    return render_template("home.html")
+    response = requests.get("http://127.0.0.1:5000/post_list/")
+    return render_template("home.html", response=response)
 
 
 @blog_bp.route("/signup/", methods=("GET", "POST"))
@@ -101,3 +103,8 @@ def category():
 @blog_bp.route("/tag-posts/<tag_id>")
 def tag():
     pass
+
+
+# if __name__ == "__main__":
+#     response = request.get(url_for(list_post))
+#     print(response)
