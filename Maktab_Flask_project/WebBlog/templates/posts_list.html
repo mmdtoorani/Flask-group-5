@@ -27,10 +27,6 @@
 {% endblock %}
 
 {% block main %}
-
-
-
-    </p>
     {% for post in posts %}
         <div class="container main-content">
             <div class="card" style="width: 18rem;" id="card{{ post.id }}">
@@ -39,24 +35,23 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
-                    <a href="#" class="btn add" onclick="DeleteFunction('{{ post.id }}')" title="add" id="add{{ post.id }}">DEACTIVE</a>
-                    <a href="#" class="btn edit" title="edit" id="{{ post.id }}">EDIT</a>
-                    <a href="#" class="btn-delete" onclick="DeleteFunction('{{ post.id }}')" title="delete" id="{{ post.id }}">DELETE</a>
-
-
+                    <a class="btn add" onclick="DeleteFunction('{{ post.id }}')" title="add"
+                       id="add{{ post.id }}">DEACTIVE</a>
+                    <a class="btn edit" title="edit" id="{{ post.id }}">EDIT</a>
+                    <a class="btn-delete" onclick="DeleteFunction('{{ post.id }}')" title="delete"
+                       id="{{ post.id }}">DELETE</a>
                 </div>
             </div>
         </div>
 
     {% endfor %}
 
+    <script>
+        function DeleteFunction(my_id) {
 
-
-<script>
-  function DeleteFunction(my_id){
-        document.getElementById('card'+my_id).remove();
-  }
-
-</script>
+            document.getElementById('card' + my_id).remove();
+        }
+        
+    </script>
 
 {% endblock %}
