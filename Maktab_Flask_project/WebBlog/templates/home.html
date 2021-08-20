@@ -7,18 +7,18 @@
 {% block left_items_in_nav %}
     {% if g.user %}
         <a href="{{ url_for('user.create') }}">
-        <button type="button" class="btn navs-button">New</button>
-    </a>
+            <button type="button" class="btn navs-button">New</button>
+        </a>
     {% endif %}
     {% if g.user %}
         <a href="{{ url_for('user.posts_list') }}">
-        <button type="button" class="btn navs-button">My Posts</button>
-    </a>
+            <button type="button" class="btn navs-button">My Posts</button>
+        </a>
     {% endif %}
     {% if g.user %}
         <a href="{{ url_for('user.profile') }}">
-        <button type="button" class="btn navs-button">My Profile</button>
-    </a>
+            <button type="button" class="btn navs-button">My Profile</button>
+        </a>
     {% endif %}
 
 {% endblock %}
@@ -30,4 +30,20 @@
         <button class="btn my-2 my-sm-0" type="button">Search</button>
     </form>
 
+{% endblock %}
+
+{% block main %}
+    {% for post in posts %}
+        <div class="container main-content">
+            <div class="card" style="width: 18rem;" id="card{{ post.id }}">
+                <img class="card-img-top" src="{{ url_for('static', filename='' + post.photo) }}"
+                     alt="{{ post.photo }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body }}</p>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
 {% endblock %}
