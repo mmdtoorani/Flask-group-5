@@ -44,20 +44,20 @@
         </div>
 
     {% endfor %}
-<p id="myp">ali</p>
-    <script>
-    console.log('1')
-    $(document).on("click", ".btn-delete", function(){
-        console.log('2')
-        $(this).parents(".card").remove();
-        var id = $(this).attr("id");
-        var string = id;
-        $.post({{ url_for('api.post_delete')}}, { string: string}, function(data) {
-            console.log('3')
-            $("#myp").html('data');
-        });
-    });
-
-    </script>
+{#<p id="myp">ali</p>#}
+{#    <script>#}
+{#    console.log('1')#}
+{#    $(document).on("click", ".btn-delete", function(){#}
+{#        console.log('2')#}
+{#        $(this).parents(".card").remove();#}
+{#        var id = $(this).attr("id");#}
+{#        var string = id;#}
+{#        $.post({{ url_for('api.post_delete')}}, { string: string}, function(data) {#}
+{#            console.log('3')#}
+{#            $("#myp").html('data');#}
+{#        });#}
+{#    });#}
+{##}
+{#    </script>#}
 
 {% endblock %}
