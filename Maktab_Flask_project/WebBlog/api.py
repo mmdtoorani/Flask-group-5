@@ -1,5 +1,5 @@
 from flask import Blueprint, session, render_template, request, url_for, redirect, jsonify
-from db import Post, User
+from WebBlog.db import Post, User
 import json
 import pprint
 api_bp = Blueprint('api', __name__)
