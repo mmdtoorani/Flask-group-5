@@ -50,7 +50,24 @@ def profile():
     current_user = User.objects(id=session["user_id"])[0]
     return render_template("profile.html", user=current_user)
 
+@login_required
+@user_bp.route("/edit/<post_id>", methods=("GET", "POST"))
+def edit(post_id):
+    post = Post.objects(id=post_id)[0]
+    if request.method == "POST":
+        title_form = request.form["title"]
+        body_form = request.form["body"]
+        error = None
 
-@user_bp.route("/edit-post/<post_id>")
-def edit():
-    pass
+        if not title_form:
+            error = "Title is required."
+
+        if error is not None:
+            flash(error)
+        else:
+            post.title = title_form
+            post.body = body_form
+            post.save()
+            return redirect(url_for("blog.home"))
+
+    return render_template("edit.html", post=post)

@@ -37,27 +37,27 @@
                     <p class="card-text">{{ post.body }}</p>
                     <a class="btn add" onclick="DeleteFunction('{{ post.id }}')" title="add"
                        id="add{{ post.id }}">DEACTIVE</a>
-                    <a class="btn edit" title="edit" id="{{ post.id }}">EDIT</a>
-                    <a class="btn-delete" onclick="DeleteFunction('{{ post.id }}')" title="delete"
-                       id="{{ post.id }}">DELETE</a>
+                    <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
+                    <a class="btn-delete"  title="delete" id="{{ post.id }}">DELETE</a>
                 </div>
             </div>
         </div>
 
     {% endfor %}
-
-    <script>
-        {#$.ajax({#}
-        {#    url: {{ url_for('api.post_delete') }},#}
-        {#    type: "GET",#}
-        {#    success: function () {#}
-                function DeleteFunction(my_id){
-        $('#card'+my_id).remove();
-  }
-        {#    }#}
-        {# })#}
-
-
-    </script>
+{#<p id="myp">ali</p>#}
+{#    <script>#}
+{#    console.log('1')#}
+{#    $(document).on("click", ".btn-delete", function(){#}
+{#        console.log('2')#}
+{#        $(this).parents(".card").remove();#}
+{#        var id = $(this).attr("id");#}
+{#        var string = id;#}
+{#        $.post({{ url_for('api.post_delete')}}, { string: string}, function(data) {#}
+{#            console.log('3')#}
+{#            $("#myp").html('data');#}
+{#        });#}
+{#    });#}
+{##}
+{#    </script>#}
 
 {% endblock %}

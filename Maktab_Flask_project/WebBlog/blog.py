@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from WebBlog.db import User, Post
 from WebBlog.LoginRequired import login_required
-from api import list_post
+from .api import list_post
 import requests
 
 blog_bp = Blueprint('blog', __name__)
@@ -31,8 +31,8 @@ def sign_up():
     if request.method == "POST":
         username_form = request.form["username"]
         first_name_form = request.form["first_name"]
-        last_name_form = request.form["first_name"]
-        email_form = request.form["first_name"]
+        last_name_form = request.form["last_name"]
+        email_form = request.form["email"]
         phone_form = request.form["phone"]
         password_form = request.form["password"]
         error = None
