@@ -38,7 +38,7 @@
                     <a class="btn add" onclick="DeleteFunction('{{ post.id }}')" title="add"
                        id="add{{ post.id }}">DEACTIVE</a>
                     <a class="btn edit" title="edit" id="{{ post.id }}">EDIT</a>
-                    <a class="btn-delete" onclick="DeleteFunction()" title="delete"
+                    <a class="btn-delete" onclick="DeleteFunction('{{ post.id }}')" title="delete"
                        id="{{ post.id }}">DELETE</a>
                 </div>
             </div>
@@ -47,16 +47,15 @@
     {% endfor %}
 
     <script>
-        $.ajax({
-            url: {{ url_for('api.post_delete') }},
-            type: "GET",
-            success: function () {
-                $('#{{ post.id }}').onclick(function DeleteFunction(my_id) {
-
-                    $('#card' + my_id).remove();
-                })
-            }
-        })
+        {#$.ajax({#}
+        {#    url: {{ url_for('api.post_delete') }},#}
+        {#    type: "GET",#}
+        {#    success: function () {#}
+                function DeleteFunction(my_id){
+        $('#card'+my_id).remove();
+  }
+        {#    }#}
+        {# })#}
 
 
     </script>
