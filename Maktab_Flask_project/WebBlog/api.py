@@ -23,14 +23,6 @@ def list_post():
     return jsonify(json_post)
 
 
-# class Test(Resource):
-#     def get(self, post_id):
-#         return {"test": post_id}
-
-
-BASE = "http://127.0.0.1:5000"
-
-
 @api_bp.route("/post_delete/<post_id>")
 def post_delete(post_id):
     if request.method == "GET":
