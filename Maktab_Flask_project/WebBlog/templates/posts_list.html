@@ -35,8 +35,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
-                    <a class="btn add" title="add"
-                       id="add{{ post.id }}">DEACTIVE</a>
+                    <a class="btn deactive" title="deactive"
+                       id="deactive{{ post.id }}">DEACTIVE</a>
                     <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
                     <a class="btn-delete" title="delete" id="{{ post.id }}">DELETE</a>
                 </div>
