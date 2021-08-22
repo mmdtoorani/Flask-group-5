@@ -24,7 +24,7 @@ class User(DynamicDocument):
 class Post(DynamicDocument):
     title = StringField(max_length=50)
     body = StringField(max_length=250)
-    status = IntField()
+    status = IntField(default=1, required=True)
     photo = StringField(max_length=250)
     likes = ListField()
     dislikes = ListField()
