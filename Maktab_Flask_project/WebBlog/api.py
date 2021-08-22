@@ -30,7 +30,7 @@ def post_delete(post_id):
         return render_template('posts_list.html')
 
 
-@api_bp.route("/post-deactive/<post_id>")
+@api_bp.route("/post_deactive/<post_id>")
 def post_deactive(post_id):
     status = {
         'ACTIVE': 1,
@@ -38,7 +38,10 @@ def post_deactive(post_id):
     }
     if request.method == "GET":
         if Post.objects(status=status['ACTIVE']):
-            Post.objects(status=status['DEACTIVE'])
+            Post.objects(id=post_id).update(
+                status=status['DEACTIVE']
+            )
+
         return render_template('posts_list.html')
 
 
