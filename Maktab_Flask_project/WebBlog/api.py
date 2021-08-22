@@ -32,7 +32,14 @@ def post_delete(post_id):
 
 @api_bp.route("/post-deactive/<post_id>")
 def post_deactive(post_id):
-    pass
+    status = {
+        'ACTIVE': 1,
+        'DEACTIVE': 0
+    }
+    if request.method == "GET":
+        if Post.objects(status=status['ACTIVE']):
+            Post.objects(status=status['DEACTIVE'])
+        return render_template('posts_list.html')
 
 
 @api_bp.route("/categories-list/")
