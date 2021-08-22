@@ -1,8 +1,7 @@
+from flask import Flask
 import json
-
-from flask import Blueprint, request, jsonify
-
-from WebBlog.db import Post
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for
+from db import Post
 
 api_bp = Blueprint('api', __name__)
 
@@ -24,12 +23,19 @@ def list_post():
     return jsonify(json_post)
 
 
-@api_bp.route("/postdelete/")
-def post_delete():
-    if request.method == 'POST':
-        post_id = request.form['string']
-        post = Post.objects(id=post_id)[0]
-        # post.delete()
+# class Test(Resource):
+#     def get(self, post_id):
+#         return {"test": post_id}
+
+
+BASE = "http://127.0.0.1:5000"
+
+
+@api_bp.route("/post_delete/<post_id>")
+def post_delete(post_id):
+    if request.method == "GET":
+        Post.objects(id=post_id).delete()
+        return render_template('posts_list.html')
 
 
 @api_bp.route("/post-deactive/<post_id>")
