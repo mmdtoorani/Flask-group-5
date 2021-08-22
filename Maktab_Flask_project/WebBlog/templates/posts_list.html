@@ -38,7 +38,7 @@
                     <a class="btn deactive" title="deactive"
                        id="deactive{{ post.id }}">DEACTIVE</a>
                     <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
-                    <a class="btn-delete" title="delete" id="{{ post.id }}">DELETE</a>
+                    <a class="btn-delete" title="delete" id="delete{{ post.id }}">DELETE</a>
                 </div>
             </div>
         </div>
@@ -50,10 +50,8 @@
 {% block js %}
     <script>
     {% for post in posts %}
-        $('#{{ post.id }}').click(function () {
-
+        $('#delete{{ post.id }}').click(function () {
             var url = "http://127.0.0.1:5000/post_delete/{{ post.id }}"
-
             $.ajax({
                 type: "GET",
                 url: url,
@@ -61,8 +59,8 @@
                     $('#card{{ post.id }}').remove()
                  },
             });
-
         });
     {% endfor %}
     </script>
+
 {% endblock %}
