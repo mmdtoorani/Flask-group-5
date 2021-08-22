@@ -28,39 +28,54 @@
 
 {% block main %}
     {% for post in posts %}
-        <div class="container main-content">
-            <div class="card" style="width: 18rem;" id="card{{ post.id }}">
-                <img class="card-img-top" src="{{ url_for('static', filename='' + post.photo) }}"
-                     alt="{{ post.photo }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ post.title }}</h5>
-                    <p class="card-text">{{ post.body }}</p>
-                    <a class="btn deactive" title="deactive"
-                       id="deactive{{ post.id }}">DEACTIVE</a>
-                    <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
-                    <a class="btn-delete" title="delete" id="delete{{ post.id }}">DELETE</a>
+        {% if post.status == 1 %}
+            <div class="container main-content">
+                <div class="card" style="width: 18rem;" id="card{{ post.id }}">
+                    <img class="card-img-top" src="{{ url_for('static', filename='' + post.photo) }}"
+                         alt="{{ post.photo }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.body }}</p>
+                        <a class="btn deactive" title="deactive"
+                           id="deactive{{ post.id }}">DEACTIVE</a>
+                        <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
+                        <a class="btn-delete" title="delete" id="delete{{ post.id }}">DELETE</a>
+                    </div>
                 </div>
             </div>
-        </div>
-
+        {% endif %}
     {% endfor %}
 
 {% endblock %}
 
 {% block js %}
     <script>
-    {% for post in posts %}
-        $('#delete{{ post.id }}').click(function () {
-            var url = "http://127.0.0.1:5000/post_delete/{{ post.id }}"
-            $.ajax({
-                type: "GET",
-                url: url,
-                success: function () {
-                    $('#card{{ post.id }}').remove()
-                 },
+        {% for post in posts %}
+            $('#delete{{ post.id }}').click(function () {
+                const url = "http://127.0.0.1:5000/post_delete/{{ post.id }}";
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function () {
+                        $('#card{{ post.id }}').remove()
+                    },
+                });
             });
-        });
-    {% endfor %}
+        {% endfor %}
     </script>
 
+    <script>
+        {% for post in posts %}
+            $('#deactive{{ post.id }}').click(function () {
+                const url = "http://127.0.0.1:5000/post_deactive/{{ post.id }}";
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function () {
+                        $('#card{{ post.id }}').css("display", "none");
+                    },
+                });
+            });
+        {% endfor %}
+    </script>
 {% endblock %}
