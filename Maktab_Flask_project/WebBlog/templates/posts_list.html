@@ -16,6 +16,22 @@
         .card {
             margin: 4px auto auto;
         }
+
+        .card img {
+            align-self: center;
+            max-width: fit-content;
+            max-height: 400px;
+        }
+
+        .card-option {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .card-option button {
+            margin-right: 10px;
+        }
+
     </style>
 {% endblock %}
 
@@ -30,19 +46,21 @@
     {% for post in posts %}
 
         <div class="container main-content">
-            <div class="card" style="width: 18rem;" id="card{{ post.id }}">
+            <div class="card mb-3" id="card{{ post.id }}">
                 <img class="card-img-top" src="{{ url_for('static', filename='' + post.photo) }}"
                      alt="{{ post.photo }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
-
-                    <button class="btn btn-warning btn-deactive" title="deactive" id="deactive{{ post.id }}"></button>
-                    <a href="{{ url_for('user.edit', post_id=post.id) }}">
-                        <button class="btn btn-info edit">edit</button>
-                    </a>
-                    <button class="btn btn-danger btn-delete" title="delete" id="delete{{ post.id }}">delete</button>
-
+                    <div class="card-option">
+                        <button class="btn btn-warning btn-deactive" title="deactive"
+                                id="deactive{{ post.id }}"></button>
+                        <a href="{{ url_for('user.edit', post_id=post.id) }}">
+                            <button class="btn btn-info edit">edit</button>
+                        </a>
+                        <button class="btn btn-danger btn-delete" title="delete" id="delete{{ post.id }}">delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
