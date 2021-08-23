@@ -16,6 +16,8 @@ def list_post():
             'title': post.title,
             'photo': post.photo,
             'body': post.body,
+            'status': post.status,
+            'tags': post.tags,
         }
         posts.append(context)
 
