@@ -37,7 +37,7 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
 
-                    <a class="btn btn-deactive" title="deactive" id="deactive{{ post.id }}">deactive</a>
+                    <a class="btn btn-deactive" title="deactive" id="deactive{{ post.id }}"></a>
                     <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
                     <a class="btn-delete" title="delete" id="delete{{ post.id }}">DELETE</a>
                 </div>
@@ -66,6 +66,11 @@
 
     <script>
         {% for post in posts %}
+            {% if post.status == 0 %}
+                $('#deactive{{ post.id }}').text('active')
+            {% elif post.status == 1 %}
+                $('#deactive{{ post.id }}').text('deactive')
+            {% endif %}
             $('#deactive{{ post.id }}').click(function () {
                 const url = "http://127.0.0.1:5000/post_deactive/{{ post.id }}";
                 $.ajax({
