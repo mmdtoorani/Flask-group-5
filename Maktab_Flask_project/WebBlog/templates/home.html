@@ -38,26 +38,33 @@
 
 
 {% block js %}
-{#    <script>#}
-{#        {% for post in posts %}#}
-{#            const card = `<div class="container main-content">#}
-{#                <div class="card" style="width: 18rem;" id="card{{ post.id }}">#}
-{#                    <img class="card-img-top" src="{{ url_for('static', filename='' + post.photo) }}"#}
-{#                         alt="{{ post.photo }}">#}
-{#                        <div class="card-body">#}
-{#                            <h5 class="card-title">{{ post.title }}</h5>#}
-{#                            <p class="card-text">{{ post.body }}</p>#}
-{#                        </div>#}
-{#                </div>#}
-{#            </div>`#}
-{#            const url = "http://127.0.0.1:5000/post_list";#}
-{#            $.ajax({#}
-{#                type: "GET",#}
-{#                url: url,#}
-{#                success: function () {#}
-{#                    $('.component').append(card)#}
-{#                }#}
-{#            });#}
-{#        {% endfor %}#}
-{#    </script>#}
+    <script>
+        {#        {% for post in posts %}#}
+
+        var url = "http://127.0.0.1:5000/post_list";
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: url,
+            success: function (data) {
+                console.log(data)
+                for (let i = 0; i <= data.length - 1; i++) {
+                    var card = `<div class="container main-content">
+                <div class="card" style="width: 18rem;" id="card${data[i]['_id']}">
+                    <img class="card-img-top" src="${data[i]['photo']}"
+                         alt="${data[i]['photo']}">
+                        <div class="card-body">
+                            <h5 class="card-title">${data[i]['title']}</h5>
+                            <p class="card-text">${data[i]['body']}</p>
+                        </div>
+                </div>
+            </div>`
+                    $('.component').append(card)
+                }
+            }
+        });
+        {#        {% endfor %}#}
+    </script>
 {% endblock %}
+

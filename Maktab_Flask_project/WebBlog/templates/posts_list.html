@@ -47,7 +47,7 @@
 
         <div class="container main-content">
             <div class="card mb-3" id="card{{ post.id }}">
-                <img class="card-img-top" src="{{ url_for('static', filename='' + post.photo) }}"
+                <img class="card-img-top" src="{{ url_for('static', filename='/img/' + post.photo) }}"
                      alt="{{ post.photo }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
