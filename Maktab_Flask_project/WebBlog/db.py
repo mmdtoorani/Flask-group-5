@@ -61,6 +61,24 @@ for post in Post.objects:
      print(post.cat[0])
     print('========')
 # Tag.drop_collection()
+
+def category(category_id):
+    list_of_cats = [category_id]
+    posts=[]
+    for cat in Category.objects:
+        if str(cat.parent_cat) in list_of_cats:
+            list_of_cats.append(str(cat.id))
+
+    for post in Post.objects:
+        print('2')
+        print(str(post.cat[0]))
+        print(list_of_cats)
+        if str(post.cat[0]) in list_of_cats:
+            print('3')
+            posts.append(post)
+
+    return posts
+print(category('61241a4138bf5af4f076d646'))
 # Post.drop_collection()
 # Category.drop_collection()
 # tag1 = Tag(name='mohseni')
@@ -72,8 +90,8 @@ for post in Post.objects:
 # print(posts)
 # cat1 = Category(name='movies')
 # cat2 = Category(name='horror', parent_cat=cat1.id)
-# # cat1.save()
-# # cat2.save()
+# cat1.save()
+# cat2.save()
 #
-# post = Post(title='test for category', cat=[cat2.id])
+# post = Post(title='test for category', cat=[str(cat2.id)])
 # post.save()
