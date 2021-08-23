@@ -37,11 +37,17 @@ def post_deactive(post_id):
         'DEACTIVE': 0
     }
     if request.method == "GET":
-        if Post.objects(status=status['ACTIVE']):
-            Post.objects(id=post_id).update(
-                status=status['DEACTIVE']
-            )
-
+        for post in Post.objects(id=post_id):
+            if post.status == status['ACTIVE']:
+                print('THIS IS ACTIVE')
+                Post.objects(id=post_id).update(
+                    status=status['DEACTIVE']
+                )
+            elif post.status == status['DEACTIVE']:
+                print('THIS IS DEACTIVE')
+                Post.objects(id=post_id).update(
+                    status=status['ACTIVE']
+                )
         return render_template('posts_list.html')
 
 
