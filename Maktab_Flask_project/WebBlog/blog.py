@@ -96,8 +96,8 @@ def post():
 
 
 @blog_bp.route("/category-posts/<category_id>")
-def category():
-    pass
+def category(category_id):
+    return category_id
 
 
 @blog_bp.route("/tag-posts/<tag_id>")
