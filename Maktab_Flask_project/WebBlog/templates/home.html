@@ -35,36 +35,35 @@
 
 {% block main %}
 
-    <br><br>
-    <p>tags</p>
-    <table id="table_tag" class="table-bordered">
+<br><br>
+<p>tags</p>
+<table id="table_tag" class="table-bordered">
 
-    </table>
-    <br><br>
-    <p>categories</p>
+</table>
+<br><br>
+<p>categories</p>
 
-        <table id="table_cat" class="table-bordered">
+<table id="table_cat" class="table-bordered">
 
-    </table>
-    <script>
-        $.ajax({
-            url: "/tags-list/",
-            type: "GET",
+</table>
+<script>
+    $.ajax({
+        url: "/tags-list/",
+        type: "GET",
 
-            success: function (response) {
-                console.log(response);
+        success: function (response) {
+            console.log(response);
 
-                for (let i = 0; i < response.length; i++) {
-                    let login= 'login';
-                    console.log(response[i])
-                    let tr_elem = $('<tr></tr>').appendTo('#table_tag')
-                    tr_elem.append(`<td onclick="redirectTo('${response[i].id}');" style="color: red" style="color: red">${response[i].name}</td>`);
-                }
-                ;
+            for (let i = 0; i < response.length; i++) {
+                let login = 'login';
+                console.log(response[i])
+                let tr_elem = $('<tr></tr>').appendTo('#table_tag')
+                tr_elem.append(`<td onclick="redirectTo('${response[i].id}');" style="color: red" style="color: red">${response[i].name}</td>`);
             }
+        }
 
-        })
-            $.ajax({
+    })
+    $.ajax({
         url: "/categories-list/",
         type: "GET",
 
@@ -80,23 +79,23 @@
                     let tr_elem = $('<tr></tr>').appendTo('#table_cat')
                     tr_elem.append(`<td onclick="redirectToCat('${response[i].children[j].id}');" style="color: red">${response[i].children[j].name}</td>`);
                 }
-                ;
             }
-            ;
         }
 
     })
 
-        function redirectTo(id){
+    function redirectTo(id) {
 
-    window.location.href="/tag-posts/"+id;
+        window.location.href = "/tag-posts/" + id;
 
-}
-        function redirectToCat(id){
+    }
 
-    window.location.href="/category-posts/"+id;
+    function redirectToCat(id) {
 
-}
+        window.location.href = "/category-posts/" + id;
+
+    }
+</script>
 
 {% block js %}
     <script>
