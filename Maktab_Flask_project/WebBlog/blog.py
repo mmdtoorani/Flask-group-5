@@ -101,8 +101,8 @@ def category(category_id):
         if str(cat.parent_cat.id) in list_of_cats:
             list_of_cats.append(str(cat.id))
 
-    posts=Post.objects(Ca)
-
+    posts=Post.objects(cat__in=list_of_cats)
+    return render_template("posts_list.html", posts=posts)
 
 
 
