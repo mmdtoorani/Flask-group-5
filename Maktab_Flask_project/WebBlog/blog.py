@@ -98,13 +98,32 @@ def post():
 
 
 @blog_bp.route("/category-posts/<category_id>")
-def category():
-    pass
+def category(category_id):
+    list_of_cats = [category_id]
+    posts=[]
+    for cat in Category.objects:
+        if cat.parent_cat:
+            print('this   ',str(cat.parent_cat.id))
+
+            print('that', str(cat.id))
+            if str(cat.parent_cat.id) in list_of_cats:
+                print('3')
+                list_of_cats.append(str(cat.id))
+
+    for post in Post.objects:
+
+        if str(post.cat[0]) in list_of_cats:
+            posts.append(post)
+    return render_template("posts_list.html", posts=posts)
 
 
 @blog_bp.route("/tag-posts/<tag_id>")
-def tag():
-    pass
+def tag(tag_id):
+    print(tag_id)
+    print(type(tag_id))
+    posts = Post.objects(tags__in=[tag_id])
+    print(posts)
+    return render_template("posts_list.html", posts=posts)
 
 # if __name__ == "__main__":
 #     response = request.get(url_for(list_post))
