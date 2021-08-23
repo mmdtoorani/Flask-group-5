@@ -101,6 +101,8 @@ def category(category_id):
         if str(cat.parent_cat.id) in list_of_cats:
             list_of_cats.append(str(cat.id))
 
+    posts=Post.objects(Ca)
+
 
 
 

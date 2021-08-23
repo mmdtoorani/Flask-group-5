@@ -30,7 +30,7 @@ class Post(DynamicDocument):
     likes = ListField()
     dislikes = ListField()
     user = ReferenceField('User', reverse_delete_rule=CASCADE)
-    cat = ReferenceField('Category', reverse_delete_rule=CASCADE)
+    cat = StringField(max_length=250)
     tags = ListField()
 
 
