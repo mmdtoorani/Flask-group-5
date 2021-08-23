@@ -50,6 +50,7 @@ def profile():
     current_user = User.objects(id=session["user_id"])[0]
     return render_template("profile.html", user=current_user)
 
+
 @login_required
 @user_bp.route("/edit/<post_id>", methods=("GET", "POST"))
 def edit(post_id):
@@ -68,6 +69,6 @@ def edit(post_id):
             post.title = title_form
             post.body = body_form
             post.save()
-            return redirect(url_for("blog.home"))
+            return redirect(url_for("user.posts_list"))
 
     return render_template("edit.html", post=post)

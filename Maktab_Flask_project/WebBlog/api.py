@@ -1,7 +1,6 @@
+from flask import Flask
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for
 import json
-
-from flask import Blueprint, jsonify
-
 from WebBlog.db import Post, Tag, Category
 
 api_bp = Blueprint('api', __name__)
@@ -17,6 +16,8 @@ def list_post():
             'title': post.title,
             'photo': post.photo,
             'body': post.body,
+            'status': post.status,
+            'tags': post.tags,
         }
         posts.append(context)
 
@@ -24,14 +25,34 @@ def list_post():
     return jsonify(json_post)
 
 
-@api_bp.route("/postdelete/")
-def post_delete():
-    pass
+
+@api_bp.route("/post_delete/<post_id>")
+def post_delete(post_id):
+    if request.method == "GET":
+        Post.objects(id=post_id).delete()
+        return render_template('posts_list.html')
+
+STATUS = {
+        'ACTIVE': 1,
+        'DEACTIVE': 0
+    }
 
 
-@api_bp.route("/post-deactive/<post_id>")
+@api_bp.route("/post_deactive/<post_id>")
 def post_deactive(post_id):
-    pass
+    if request.method == "GET":
+        for post in Post.objects(id=post_id):
+            if post.status == STATUS['ACTIVE']:
+                # print('THIS IS ACTIVE')
+                Post.objects(id=post_id).update(
+                    status=STATUS['DEACTIVE']
+                )
+            elif post.status == STATUS['DEACTIVE']:
+                # print('THIS IS DEACTIVE')
+                Post.objects(id=post_id).update(
+                    status=STATUS['ACTIVE']
+                )
+        return render_template('posts_list.html')
 
 
 @api_bp.route("/categories-list/")

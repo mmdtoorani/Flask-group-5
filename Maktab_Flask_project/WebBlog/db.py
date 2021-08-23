@@ -25,7 +25,7 @@ class User(DynamicDocument):
 class Post(DynamicDocument):
     title = StringField(max_length=50)
     body = StringField(max_length=250)
-    status = IntField()
+    status = IntField(default=1, required=True)
     photo = StringField(max_length=250)
     likes = ListField()
     dislikes = ListField()
@@ -36,9 +36,15 @@ class Post(DynamicDocument):
 
 # Post.drop_collection()
 # Tag.drop_collection()
-#
-# tag1 = Tag(name='ali')
-# tag2 = Tag(name='reza')
+# marmot = Animal(genus='Marmota', family='Sciuridae'
+# with open('marmot.jpg', 'rb') as fd:
+#     marmot.photo.put(fd, content_type = 'image/jpeg')
+# marmot.save()
+
+
+# some examples of db
+# tag1 = Tag(name='johnny depp')
+
 # tag1.save()
 # tag2.save()
 # post1=Post(title='ali', tags=[str(tag1.id), str(tag2.id)])
@@ -62,7 +68,7 @@ class Post(DynamicDocument):
 #      print(post.cat[0])
 #     print('========')
 # # Tag.drop_collection()
-#
+
 # def category(category_id):
 #     list_of_cats = [category_id]
 #     posts=[]

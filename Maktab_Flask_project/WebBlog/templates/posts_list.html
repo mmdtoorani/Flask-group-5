@@ -16,6 +16,22 @@
         .card {
             margin: 4px auto auto;
         }
+
+        .card img {
+            align-self: center;
+            max-width: fit-content;
+            max-height: 400px;
+        }
+
+        .card-option {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .card-option button {
+            margin-right: 10px;
+        }
+
     </style>
 {% endblock %}
 
@@ -38,15 +54,61 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
-                    <a class="btn add" onclick="DeleteFunction('{{ post.id }}')" title="add"
-                       id="add{{ post.id }}">DEACTIVE</a>
-                    <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
-                    <a class="btn-delete"  title="delete" id="{{ post.id }}">DELETE</a>
+                    <div class="card-option">
+                        <button class="btn btn-warning btn-deactive" title="deactive"
+                                id="deactive{{ post.id }}"></button>
+                        <a href="{{ url_for('user.edit', post_id=post.id) }}">
+                            <button class="btn btn-info edit">edit</button>
+                        </a>
+                        <button class="btn btn-danger btn-delete" title="delete" id="delete{{ post.id }}">delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
     {% endfor %}
 
+{% endblock %}
 
+{% block js %}
+    <script>
+        {% for post in posts %}
+            $('#delete{{ post.id }}').click(function () {
+                const url = "http://127.0.0.1:5000/post_delete/{{ post.id }}";
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function () {
+                        $('#card{{ post.id }}').remove()
+                    },
+                });
+            });
+        {% endfor %}
+    </script>
+
+    <script>
+        {% for post in posts %}
+            {% if post.status == 0 %}
+                $('#deactive{{ post.id }}').text('active')
+            {% elif post.status == 1 %}
+                $('#deactive{{ post.id }}').text('deactive')
+            {% endif %}
+            $('#deactive{{ post.id }}').click(function () {
+                const url = "http://127.0.0.1:5000/post_deactive/{{ post.id }}";
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    success: function () {
+                        if ($('#deactive{{ post.id }}').text() === 'active') {
+                            $('#deactive{{ post.id }}').text('deactive')
+
+                        } else if ($('#deactive{{ post.id }}').text() === 'deactive') {
+                            $('#deactive{{ post.id }}').text('active')
+                        }
+                    },
+                });
+            });
+        {% endfor %}
+    </script>
 {% endblock %}
