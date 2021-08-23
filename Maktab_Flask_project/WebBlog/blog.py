@@ -96,10 +96,11 @@ def post():
 @blog_bp.route("/category-posts/<category_id>")
 def category(category_id):
     list_of_cats = [category_id]
-    posts = []
+    posts=[]
     for cat in Category.objects:
-        if str(cat.parent_cat) in list_of_cats:
-            list_of_cats.append(str(cat.id))
+        if cat.parent_cat:
+            if str(cat.parent_cat[0]) in list_of_cats:
+                list_of_cats.append(str(cat.id))
 
     for post in Post.objects:
         print('2')
