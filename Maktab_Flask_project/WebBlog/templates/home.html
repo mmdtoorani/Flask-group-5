@@ -57,10 +57,30 @@
             }
 
         })
+            $.ajax({
+        url: "/categories-list/",
+        type: "GET",
 
-        function redirectTo(id){
+        success: function (response) {
+            console.log(response);
 
-    window.location.href="/tag-posts/"+id;
+            for (let i = 0; i < response.length; i++) {
+                console.log(response[i])
+                let tr_elem = $('<tr></tr>').appendTo('#my_table')
+                tr_elem.append(`<td onclick="my_display('${response[i].id}')">${response[i].name}</td>`);
+                for (let j = 0; j < response[i].children.length; j++) {
+                    console.log(response[i].children[j])
+                    let tr_elem = $('<tr></tr>').appendTo('#my_table')
+                    tr_elem.append(`<td onclick="location.href = '/'" style="color: red">${response[i].children[j].name}</td>`);
+                }
+                ;
+            }
+            ;
+        }
+
+    })
+
+
 
 }
     </script>
