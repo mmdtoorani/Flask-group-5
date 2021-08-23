@@ -122,6 +122,4 @@ def tag(tag_id):
     return render_template("posts_list.html", posts=posts)
 
 
-@blog_bp.route("/test/")
-def test():
-    return render_template("test.html")
+
