@@ -28,22 +28,24 @@
 
 {% block main %}
     {% for post in posts %}
-        {% if post.status == 1 %}
-            <div class="container main-content">
-                <div class="card" style="width: 18rem;" id="card{{ post.id }}">
-                    <img class="card-img-top" src="{{ url_for('static', filename='' + post.photo) }}"
-                         alt="{{ post.photo }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
-                        <p class="card-text">{{ post.body }}</p>
-                        <a class="btn deactive" title="deactive"
-                           id="deactive{{ post.id }}">DEACTIVE</a>
-                        <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
-                        <a class="btn-delete" title="delete" id="delete{{ post.id }}">DELETE</a>
-                    </div>
+
+        <div class="container main-content">
+            <div class="card" style="width: 18rem;" id="card{{ post.id }}">
+                <img class="card-img-top" src="{{ url_for('static', filename='' + post.photo) }}"
+                     alt="{{ post.photo }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.body }}</p>
+
+                    <a class="btn btn-deactive" title="deactive" id="deactive{{ post.id }}">
+                        {% if post.status == 1 %}DEACTIVE{% elif post.status == 0 %}ACTIVE{% endif %}
+                    </a>
+                    <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
+                    <a class="btn-delete" title="delete" id="delete{{ post.id }}">DELETE</a>
                 </div>
             </div>
-        {% endif %}
+        </div>
+
     {% endfor %}
 
 {% endblock %}
@@ -72,7 +74,16 @@
                     type: "GET",
                     url: url,
                     success: function () {
-                        $('#card{{ post.id }}').css("display", "none");
+                        {#$('#deactive{{ post.id }}').click(function () {#}
+                        if ($('#deactive{{ post.id }}').text() === 'ACTIVE') {
+                            $('#deactive{{ post.id }}').text('DEACTIVE')
+
+                        } else if ($('#deactive{{ post.id }}').text() === 'DEACTIVE') {
+                            $('#deactive{{ post.id }}').text('ACTIVE')
+                        }
+                        {#     }#}
+                        {#)#}
+
                     },
                 });
             });
