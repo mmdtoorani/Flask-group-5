@@ -37,9 +37,12 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
 
-                    <a class="btn btn-deactive" title="deactive" id="deactive{{ post.id }}"></a>
-                    <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
-                    <a class="btn-delete" title="delete" id="delete{{ post.id }}">DELETE</a>
+                    <button class="btn btn-warning btn-deactive" title="deactive" id="deactive{{ post.id }}"></button>
+                    <a href="{{ url_for('user.edit', post_id=post.id) }}">
+                        <button class="btn btn-info edit">edit</button>
+                    </a>
+                    <button class="btn btn-danger btn-delete" title="delete" id="delete{{ post.id }}">delete</button>
+
                 </div>
             </div>
         </div>
