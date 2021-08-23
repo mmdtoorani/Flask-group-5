@@ -41,12 +41,12 @@ def list_categories():
     for cat1 in Category.objects(parent_cat=None):
         for cat2 in Category.objects(parent_cat=cat1):
             context2 = {
-                '_id': str(cat2.id),
+                'id': str(cat2.id),
                 'name': cat2.name
             }
             categories_2.append(context2)
         context1 = {
-            '_id': str(cat1.id),
+            'id': str(cat1.id),
             'name': cat1.name,
             'children': categories_2
         }
