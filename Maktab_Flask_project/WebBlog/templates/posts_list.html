@@ -28,10 +28,13 @@
 
 {% block main %}
     {% for post in posts %}
+        <h1>{{ post.title }}</h1>
         <div class="container main-content">
             <div class="card" style="width: 18rem;" id="card{{ post.id }}">
+                {% if post.photo %}
                 <img class="card-img-top" src="{{ url_for('static', filename='' + post.photo) }}"
                      alt="{{ post.photo }}">
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>

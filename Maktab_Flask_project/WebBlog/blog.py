@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, url_for, redirect, flash, session, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from WebBlog.db import User, Post
+from WebBlog.db import User, Post, Tag
 from WebBlog.LoginRequired import login_required
 from .api import list_post
 import requests
@@ -101,10 +101,14 @@ def category():
 
 
 @blog_bp.route("/tag-posts/<tag_id>")
-def tag():
-    pass
+def tag(tag_id):
+    print(tag_id)
+    print(type(tag_id))
+    posts = Post.objects(tags__in=[tag_id])
+    print(posts)
+    return render_template("posts_list.html", posts=posts)
 
 
-# if __name__ == "__main__":
-#     response = request.get(url_for(list_post))
-#     print(response)
+@blog_bp.route("/test/")
+def test():
+    return render_template("test.html")

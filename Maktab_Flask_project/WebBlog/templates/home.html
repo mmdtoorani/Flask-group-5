@@ -33,5 +33,35 @@
 {% endblock %}
 
 {% block main %}
-    {# set home AJAX for show posts in home here... #}
+    <table id="table_tag" class="table-bordered">
+
+    </table>
+        <table id="my_table" class="table-bordered">
+
+    </table>
+    <script>
+        $.ajax({
+            url: "/tags-list/",
+            type: "GET",
+
+            success: function (response) {
+                console.log(response);
+
+                for (let i = 0; i < response.length; i++) {
+                    let login= 'login';
+                    console.log(response[i])
+                    let tr_elem = $('<tr></tr>').appendTo('#table_tag')
+                    tr_elem.append(`<td onclick="redirectTo('${response[i].id}');" style="color: red" style="color: red">${response[i].name}</td>`);
+                }
+                ;
+            }
+
+        })
+
+        function redirectTo(id){
+
+    window.location.href="/tag-posts/"+id;
+
+}
+    </script>
 {% endblock %}
