@@ -73,11 +73,11 @@
             for (let i = 0; i < response.length; i++) {
                 console.log(response[i])
                 let tr_elem = $('<tr></tr>').appendTo('#table_cat')
-                tr_elem.append(`<td onclick="redirectTo('${response[i].id}');">${response[i].name}</td>`);
+                tr_elem.append(`<td onclick="redirectToCat('${response[i].id}');">${response[i].name}</td>`);
                 for (let j = 0; j < response[i].children.length; j++) {
                     console.log(response[i].children[j])
                     let tr_elem = $('<tr></tr>').appendTo('#table_cat')
-                    tr_elem.append(`<td onclick="redirectTo('${response[i].children[j].id}');" style="color: red">${response[i].children[j].name}</td>`);
+                    tr_elem.append(`<td onclick="redirectToCat('${response[i].children[j].id}');" style="color: red">${response[i].children[j].name}</td>`);
                 }
                 ;
             }

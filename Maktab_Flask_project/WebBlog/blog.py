@@ -1,10 +1,8 @@
+import requests
 from flask import Blueprint, render_template, request, url_for, redirect, flash, session, g
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.utils import secure_filename
-from WebBlog.db import User, Post, Tag
-from WebBlog.LoginRequired import login_required
-from .api import list_post
-import requests
+
+from WebBlog.db import User, Post, Category
 
 blog_bp = Blueprint('blog', __name__)
 
@@ -97,7 +95,14 @@ def post():
 
 @blog_bp.route("/category-posts/<category_id>")
 def category(category_id):
-    return category_id
+    list_of_cats= [category_id]
+    category_selected = Category.objects(id=category_id)[0]
+    for cat in Category.objects:
+        if str(cat.parent_cat.id) in list_of_cats:
+            list_of_cats.append(str(cat.id))
+
+
+
 
 
 @blog_bp.route("/tag-posts/<tag_id>")
