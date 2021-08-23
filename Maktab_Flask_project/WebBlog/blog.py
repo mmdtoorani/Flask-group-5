@@ -99,15 +99,16 @@ def category(category_id):
     posts=[]
     for cat in Category.objects:
         if cat.parent_cat:
-            if str(cat.parent_cat[0]) in list_of_cats:
+            print('this   ',str(cat.parent_cat.id))
+
+            print('that', str(cat.id))
+            if str(cat.parent_cat.id) in list_of_cats:
+                print('3')
                 list_of_cats.append(str(cat.id))
 
     for post in Post.objects:
-        print('2')
-        print(str(post.cat[0]))
-        print(list_of_cats)
+
         if str(post.cat[0]) in list_of_cats:
-            print('3')
             posts.append(post)
     return render_template("posts_list.html", posts=posts)
 

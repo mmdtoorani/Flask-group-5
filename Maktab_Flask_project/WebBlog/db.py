@@ -49,39 +49,39 @@ class Post(DynamicDocument):
 #     print(tag.id)
 #     print('----------')
 
-
-for cat in Category.objects:
-    print(cat.name)
-    print(cat.id)
-    print(cat.parent_cat)
-    print('----------')
-
-for post in Post.objects:
-    print(post.title)
-    if post.cat:
-     print(post.cat[0])
-    print('========')
-# Tag.drop_collection()
-
-def category(category_id):
-    list_of_cats = [category_id]
-    posts=[]
-    for cat in Category.objects:
-        if cat.parent_cat:
-            print('this   ',str(cat.parent_cat.id))
-
-            print('that', str(cat.id))
-            if str(cat.parent_cat.id) in list_of_cats:
-                print('3')
-                list_of_cats.append(str(cat.id))
-
-    for post in Post.objects:
-
-        if str(post.cat[0]) in list_of_cats:
-            posts.append(post)
-    print(list_of_cats)
-    return posts
-print(category('61242074f2074a1b42f424ab'))
+#
+# for cat in Category.objects:
+#     print(cat.name)
+#     print(cat.id)
+#     print(cat.parent_cat)
+#     print('----------')
+#
+# for post in Post.objects:
+#     print(post.title)
+#     if post.cat:
+#      print(post.cat[0])
+#     print('========')
+# # Tag.drop_collection()
+#
+# def category(category_id):
+#     list_of_cats = [category_id]
+#     posts=[]
+#     for cat in Category.objects:
+#         if cat.parent_cat:
+#             print('this   ',str(cat.parent_cat.id))
+#
+#             print('that', str(cat.id))
+#             if str(cat.parent_cat.id) in list_of_cats:
+#                 print('3')
+#                 list_of_cats.append(str(cat.id))
+#
+#     for post in Post.objects:
+#
+#         if str(post.cat[0]) in list_of_cats:
+#             posts.append(post)
+#     print(list_of_cats)
+#     return posts
+# print(category('61242074f2074a1b42f424ab'))
 # Post.drop_collection()
 # Category.drop_collection()
 # tag1 = Tag(name='mohseni')
