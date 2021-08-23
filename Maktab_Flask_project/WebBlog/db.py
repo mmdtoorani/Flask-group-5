@@ -5,7 +5,7 @@ connect(host="mongodb://127.0.0.1:27017/my_db")
 
 class Category(DynamicDocument):
     name = StringField(max_length=50)
-    parent_cat = ReferenceField('self', required=False)
+    parent_cat = ListField()
 
 
 class Tag(DynamicDocument):
@@ -44,22 +44,23 @@ class Post(DynamicDocument):
 # post1=Post(title='ali', tags=[str(tag1.id), str(tag2.id)])
 # post1.save()
 
-for tag in Tag.objects:
-    print(tag.name)
-    print(tag.id)
-    print('----------')
+# for tag in Tag.objects:
+#     print(tag.name)
+#     print(tag.id)
+#     print('----------')
 
 
 for cat in Category.objects:
     print(cat.name)
     print(cat.id)
+    print(cat.parent_cat)
     print('----------')
 
-for post in Post.objects:
-    print(post.title)
-    if post.cat:
-     print(post.cat[0])
-    print('========')
+# for post in Post.objects:
+#     print(post.title)
+#     if post.cat:
+#      print(post.cat[0])
+#     print('========')
 # Tag.drop_collection()
 
 def category(category_id):
@@ -78,7 +79,7 @@ def category(category_id):
             posts.append(post)
 
     return posts
-print(category('61241a4138bf5af4f076d646'))
+# print(category('61241a4138bf5af4f076d646'))
 # Post.drop_collection()
 # Category.drop_collection()
 # tag1 = Tag(name='mohseni')
@@ -89,8 +90,9 @@ print(category('61241a4138bf5af4f076d646'))
 # posts = Post.objects(tags__in=['61240a7390130f3c3bbbafb9'])
 # print(posts)
 # cat1 = Category(name='movies')
-# cat2 = Category(name='horror', parent_cat=cat1.id)
 # cat1.save()
+# cat2 = Category(name='horror', parent_cat=[str(cat1.id)])
+#
 # cat2.save()
 #
 # post = Post(title='test for category', cat=[str(cat2.id)])
