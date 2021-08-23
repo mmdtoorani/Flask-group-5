@@ -22,10 +22,10 @@ def load_logged_in_user():
 @blog_bp.route('/')
 @blog_bp.route('/home')
 def home():
-    # if request.method == "GET":
-    #     for post in Post.objects:
-    #         if post.status == STATUS['ACTIVE']:
-    return render_template("home.html")
+    if request.method == "GET":
+        for posts in Post.objects:
+            # if posts.status == STATUS['ACTIVE']:
+            return render_template("home.html", posts=posts)
 
 
 @blog_bp.route("/signup/", methods=("GET", "POST"))
@@ -105,7 +105,6 @@ def category():
 @blog_bp.route("/tag-posts/<tag_id>")
 def tag():
     pass
-
 
 # if __name__ == "__main__":
 #     response = request.get(url_for(list_post))
