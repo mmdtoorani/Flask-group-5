@@ -22,6 +22,9 @@ def load_logged_in_user():
 @blog_bp.route('/')
 @blog_bp.route('/home')
 def home():
+    # if request.method == "GET":
+    #     for post in Post.objects:
+    #         if post.status == STATUS['ACTIVE']:
     return render_template("home.html")
 
 
