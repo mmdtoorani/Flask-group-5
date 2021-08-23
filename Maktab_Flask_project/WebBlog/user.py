@@ -17,7 +17,7 @@ def create():
         user_id_form = session['user_id']
         f = request.files.get('image')
         fname = secure_filename(f.filename)
-        f.save('WebBlog/static/' + fname)
+        f.save('WebBlog/static/img' + fname)
         image = fname
         error = None
         if not title_form:
@@ -63,7 +63,7 @@ def edit(post_id):
         if not title_form:
             error = "Title is required."
 
-        if error is not None:
+        if error:
             flash(error)
         else:
             post.title = title_form

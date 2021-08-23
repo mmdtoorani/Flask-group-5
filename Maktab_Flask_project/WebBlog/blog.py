@@ -1,4 +1,3 @@
-import requests
 from flask import Blueprint, render_template, request, url_for, redirect, flash, session, g
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -23,10 +22,10 @@ def load_logged_in_user():
 @blog_bp.route('/')
 @blog_bp.route('/home')
 def home():
-    # if request.method == "GET":
-    #     for post in Post.objects:
-    #         if post.status == STATUS['ACTIVE']:
-    return render_template("home.html")
+    if request.method == "GET":
+        for posts in Post.objects:
+            # if posts.status == STATUS['ACTIVE']:
+            return render_template("home.html", posts=posts)
 
 
 @blog_bp.route("/signup/", methods=("GET", "POST"))
@@ -126,5 +125,6 @@ def tag(tag_id):
     print(posts)
     return render_template("posts_list.html", posts=posts)
 
-
-
+# if __name__ == "__main__":
+#     response = request.get(url_for(list_post))
+#     print(response)
