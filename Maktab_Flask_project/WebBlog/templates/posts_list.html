@@ -37,9 +37,7 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
 
-                    <a class="btn btn-deactive" title="deactive" id="deactive{{ post.id }}">
-                        {% if post.status == 1 %}DEACTIVE{% elif post.status == 0 %}ACTIVE{% endif %}
-                    </a>
+                    <a class="btn btn-deactive" title="deactive" id="deactive{{ post.id }}">deactive</a>
                     <a class="btn edit" href="{{ url_for('user.edit', post_id=post.id) }}">Edit</a>
                     <a class="btn-delete" title="delete" id="delete{{ post.id }}">DELETE</a>
                 </div>
@@ -74,16 +72,12 @@
                     type: "GET",
                     url: url,
                     success: function () {
-                        {#$('#deactive{{ post.id }}').click(function () {#}
-                        if ($('#deactive{{ post.id }}').text() === 'ACTIVE') {
-                            $('#deactive{{ post.id }}').text('DEACTIVE')
+                        if ($('#deactive{{ post.id }}').text() === 'active') {
+                            $('#deactive{{ post.id }}').text('deactive')
 
-                        } else if ($('#deactive{{ post.id }}').text() === 'DEACTIVE') {
-                            $('#deactive{{ post.id }}').text('ACTIVE')
+                        } else if ($('#deactive{{ post.id }}').text() === 'deactive') {
+                            $('#deactive{{ post.id }}').text('active')
                         }
-                        {#     }#}
-                        {#)#}
-
                     },
                 });
             });
