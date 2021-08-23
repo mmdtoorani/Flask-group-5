@@ -30,23 +30,25 @@ def post_delete(post_id):
         return render_template('posts_list.html')
 
 
-@api_bp.route("/post_deactive/<post_id>")
-def post_deactive(post_id):
-    status = {
+STATUS = {
         'ACTIVE': 1,
         'DEACTIVE': 0
     }
+
+
+@api_bp.route("/post_deactive/<post_id>")
+def post_deactive(post_id):
     if request.method == "GET":
         for post in Post.objects(id=post_id):
-            if post.status == status['ACTIVE']:
-                print('THIS IS ACTIVE')
+            if post.status == STATUS['ACTIVE']:
+                # print('THIS IS ACTIVE')
                 Post.objects(id=post_id).update(
-                    status=status['DEACTIVE']
+                    status=STATUS['DEACTIVE']
                 )
-            elif post.status == status['DEACTIVE']:
-                print('THIS IS DEACTIVE')
+            elif post.status == STATUS['DEACTIVE']:
+                # print('THIS IS DEACTIVE')
                 Post.objects(id=post_id).update(
-                    status=status['ACTIVE']
+                    status=STATUS['ACTIVE']
                 )
         return render_template('posts_list.html')
 
