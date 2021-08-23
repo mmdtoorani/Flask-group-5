@@ -62,7 +62,7 @@ class Post(DynamicDocument):
 #
 # post1 = Post(title='pirates', body='loskvmkffvakflv', status=1, user=user1)
 # post1.save()
-#
+
 # print(cat2.id)
 # print(post1.tags)
 # print(post1.likes)
