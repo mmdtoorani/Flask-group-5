@@ -15,9 +15,9 @@ def get_tags(list_of_names):
             list_of_names.remove(tag.name)
     if list_of_names:
         for name in list_of_names:
-            tag_created = Tag(name = name)
+            tag_created = Tag(name= name)
             tag_created.save()
-            list_of_ids.append(tag_created.id)
+            list_of_ids.append(str(tag_created.id))
     return list_of_ids
 
 
