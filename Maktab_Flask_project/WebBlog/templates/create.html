@@ -28,10 +28,19 @@
                                 <input type="text" name="tags" id="tags"
                                        style="border-top: 1px solid  black; padding-top: 2px">
                                 <label>suggeted tags</label>
-                                <select name="tag_suggest" id="tags_suggest">
+                                <select name="tag_suggest" id="tags_suggest" style="border-top: 1px solid  black; padding-top: 2px">
                                     {% for tag in tags %}
                                         <option value="volvo">Volvo</option>
                                         <option value="{{ tag.name }}">{{ tag.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <label for="category">category</label><br>
+                                <select name="category" id="category" style="border-top: 1px solid  black; padding-top: 2px">
+                                    {% for cat in cats %}
+
+                                        <option value="{{ cat.name }}">{{ cat.name }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
