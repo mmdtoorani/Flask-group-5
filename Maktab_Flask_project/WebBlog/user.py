@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, url_for, redirect, flash,
 from werkzeug.utils import secure_filename
 
 from WebBlog.LoginRequired import login_required
-from WebBlog.db import User, Post
+from WebBlog.db import User, Post, Tag
 
 user_bp = Blueprint('user', __name__)
 
@@ -33,8 +33,8 @@ def create():
             )
             post_created.save()
             return redirect(url_for("blog.home"))
-
-    return render_template("create.html")
+    tags = Tag.objects()
+    return render_template("create.html", tags=tags)
 
 
 @user_bp.route("/posts-list/")

@@ -23,6 +23,18 @@
                                 <input type="file" name="image" id="image" required
                                        style="border-top: 1px solid  black; padding-top: 2px">
                             </div>
+                            <div class="form-floating mb-3">
+                                <label for="tags">tags(seperate with ,)</label><br>
+                                <input type="text" name="tags" id="tags"
+                                       style="border-top: 1px solid  black; padding-top: 2px">
+                                <label>suggeted tags</label>
+                                <select name="tag_suggest" id="tags_suggest">
+                                    {% for tag in tags %}
+                                        <option value="volvo">Volvo</option>
+                                        <option value="{{ tag.name }}">{{ tag.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
 
                             <div class="d-grid">
                                 <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Create
