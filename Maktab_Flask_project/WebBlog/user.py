@@ -20,9 +20,6 @@ def get_tags(list_of_names):
             list_of_ids.append(str(tag_created.id))
     return list_of_ids
 
-# def get_category(cat):
-#     for cat in Category.objects:
-#         if cat.name
 
 @login_required
 @user_bp.route("/create", methods=("GET", "POST"))
