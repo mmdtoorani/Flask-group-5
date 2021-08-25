@@ -25,12 +25,12 @@ def list_post():
     return jsonify(json_post)
 
 
-
 @api_bp.route("/post_delete/<post_id>")
 def post_delete(post_id):
     if request.method == "GET":
         Post.objects(id=post_id).delete()
         return render_template('posts_list.html')
+
 
 STATUS = {
         'ACTIVE': 1,
