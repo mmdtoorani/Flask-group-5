@@ -50,10 +50,10 @@ class Post(DynamicDocument):
 # post1=Post(title='ali', tags=[str(tag1.id), str(tag2.id)])
 # post1.save()
 
-# for tag in Tag.objects:
-#     print(tag.name)
-#     print(tag.id)
-#     print('----------')
+for tag in Tag.objects:
+    print(tag.name)
+    print(tag.id)
+    print('----------')
 
 #
 # for cat in Category.objects:
@@ -62,11 +62,10 @@ class Post(DynamicDocument):
 #     print(cat.parent_cat)
 #     print('----------')
 #
-# for post in Post.objects:
-#     print(post.title)
-#     if post.cat:
-#      print(post.cat[0])
-#     print('========')
+for post in Post.objects:
+    print(post.title)
+    print(post.tags)
+    print('========')
 # # Tag.drop_collection()
 
 # def category(category_id):
