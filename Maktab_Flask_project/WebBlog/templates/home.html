@@ -43,24 +43,28 @@
     <br><br>
     <p>categories</p>
 
-    <table id="table_cat" class="table-bordered">
+        <table id="table_cat" class="table-bordered">
 
     </table>
+
+{% endblock %}
+{% block js %}
     <script>
         $.ajax({
             url: "http://127.0.0.1:5000/tags-list/",
             type: "GET",
 
-            success: function (response) {
-                console.log(response);
+        success: function (response) {
+        console.log(response);
 
-                for (let i = 0; i < response.length; i++) {
-                    let login = 'login';
-                    console.log(response[i])
-                    let tr_elem = $('<tr></tr>').appendTo('#table_tag')
-                    tr_elem.append(`<td onclick="redirectTo('${response[i].id}');" style="color: red" style="color: red">${response[i].name}</td>`);
-                }
-            }
+        for (let i = 0; i < response.length; i++) {
+        let login= 'login';
+        console.log(response[i])
+        let tr_elem = $('<tr></tr>').appendTo('#table_tag')
+        tr_elem.append(`<td onclick="redirectTo('${response[i].id}');" style="color: red" style="color: red">${response[i].name}</td>`);
+    }
+
+    }
 
         })
         $.ajax({
