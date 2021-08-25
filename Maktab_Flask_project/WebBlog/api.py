@@ -1,7 +1,7 @@
 from flask import Flask
 import json
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for
-from db import Post
+from .db import Post
 
 api_bp = Blueprint('api', __name__)
 
@@ -65,9 +65,24 @@ def list_tags():
     pass
 
 
-@api_bp.route("/search/")
+@api_bp.route("/search/<>")
 def search():
-    pass
+    posts = []
+    for post in Post.objects(tags='mongodb'):
+        context = {
+            '_id': str(post.id),
+            'user_id': str(post.user),
+            'title': post.title,
+            'photo': post.photo,
+            'body': post.body,
+            'status': post.status,
+            'tags': post.tags,
+        }
+        posts.append(context)
+
+    json_post = json.loads(json.dumps(posts))
+    return jsonify(json_post)
+
 
 
 @api_bp.route("/user-profile/<user_id>")

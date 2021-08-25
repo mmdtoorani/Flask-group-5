@@ -37,6 +37,7 @@ def sign_up():
         email_form = request.form["email"]
         phone_form = request.form["phone"]
         password_form = request.form["password"]
+        password_form2 = request.form["password2"]
         error = None
 
         if not username_form:
@@ -45,8 +46,15 @@ def sign_up():
         elif not password_form:
             error = "Password is required."
 
+
         elif User.objects(username=username_form):
             error = f"User {username_form} is already registered."
+
+        elif password_form2 != password_form:
+            error = "Pass repetition not Confirmed"
+
+        elif len(password_form2) < 8:
+            error = "Password Should at least 8 characters."
 
         if error is None:
             user_created = User(username=username_form,
