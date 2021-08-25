@@ -2,9 +2,23 @@ from flask import Blueprint, render_template, request, url_for, redirect, flash,
 from werkzeug.utils import secure_filename
 
 from WebBlog.LoginRequired import login_required
-from WebBlog.db import User, Post
+from WebBlog.db import User, Post, Tag, Category
 
 user_bp = Blueprint('user', __name__)
+
+
+def get_tags(list_of_names):
+    list_of_ids = []
+    for tag in Tag.objects:
+        if tag.name in list_of_names:
+            list_of_ids.append(str(tag.id))
+            list_of_names.remove(tag.name)
+    if list_of_names:
+        for name in list_of_names:
+            tag_created = Tag(name= name)
+            tag_created.save()
+            list_of_ids.append(str(tag_created.id))
+    return list_of_ids
 
 
 @login_required
@@ -16,6 +30,12 @@ def create():
         body_form = request.form["body"]
         user_id_form = session['user_id']
         f = request.files.get('image')
+        tags_form = request.form['tags']
+        cat_form = request.form['category']
+        cat_form = Category.objects(name = cat_form)[0].id
+        print(tags_form)
+        tags_form_ids = get_tags(tags_form.split(','))
+        print(tags_form_ids)
         fname = secure_filename(f.filename)
         f.save('WebBlog/static/img' + fname)
         image = fname
@@ -29,12 +49,15 @@ def create():
                 title=title_form,
                 body=body_form,
                 user=User.objects(id=user_id_form)[0],
-                photo=image
+                photo=image,
+                tags=tags_form_ids,
+                cat = [str(cat_form)]
             )
             post_created.save()
             return redirect(url_for("blog.home"))
-
-    return render_template("create.html")
+    tags = Tag.objects()
+    cats = Category.objects()
+    return render_template("create.html", tags=tags, cats = cats)
 
 
 @user_bp.route("/posts-list/")
