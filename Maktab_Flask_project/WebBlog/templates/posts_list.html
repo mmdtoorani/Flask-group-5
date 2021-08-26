@@ -55,6 +55,13 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
                     <div class="card-option">
+                        <a href="{{ url_for('user.like', post_id=post.id) }}">
+                            <i  class="fa fa-thumbs-up"></i><br><p>   </p>
+                        </a>
+                        <a href="{{ url_for('user.dislike', post_id=post.id) }}">
+                            <i  class="fa fa-thumbs-down"></i>
+                        </a>
+
                         <button class="btn btn-warning btn-deactive" title="deactive"
                                 id="deactive{{ post.id }}"></button>
                         <a href="{{ url_for('user.edit', post_id=post.id) }}">
@@ -62,6 +69,7 @@
                         </a>
                         <button class="btn btn-danger btn-delete" title="delete" id="delete{{ post.id }}">delete
                         </button>
+
                     </div>
                 </div>
             </div>
@@ -111,6 +119,11 @@
             });
         {% endfor %}
     </script>
+    <script>
+    function myFunction(x) {
+  x.classList.toggle("fa-thumbs-down");
+}
+    </script>
        <script>
         $("#search_btn").on('click', function () {
             var keyword = $("#search_box").val();
@@ -123,14 +136,7 @@
                     dataType: "HTML",
                     success: function (data) {
                         console.log(data)
-                        {#var innerhtml = "";#}
-                        {#for (let post of data){#}
-                        {#    console.log(post)#}
-                            {#innerhtml += "<p>"+post['body']+"</p>"#}
-                            {#innerhtml += "<p>"+post['tags']+"</p>"#}
-                        {#        #}
-                        {#}#}
-                        {##}
+
                         $(".main-content").html(data);
                     },
                 });

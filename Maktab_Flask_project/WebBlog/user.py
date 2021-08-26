@@ -15,7 +15,7 @@ def get_tags(list_of_names):
             list_of_names.remove(tag.name)
     if list_of_names:
         for name in list_of_names:
-            tag_created = Tag(name= name)
+            tag_created = Tag(name=name)
             tag_created.save()
             list_of_ids.append(str(tag_created.id))
     return list_of_ids
@@ -32,7 +32,7 @@ def create():
         f = request.files.get('image')
         tags_form = request.form['tags']
         cat_form = request.form['category']
-        cat_form = Category.objects(name = cat_form)[0].id
+        cat_form = Category.objects(name=cat_form)[0].id
         print(tags_form)
         tags_form_ids = get_tags(tags_form.split(','))
         print(tags_form_ids)
@@ -51,13 +51,13 @@ def create():
                 user=User.objects(id=user_id_form)[0],
                 photo=image,
                 tags=tags_form_ids,
-                cat = [str(cat_form)]
+                cat=[str(cat_form)]
             )
             post_created.save()
             return redirect(url_for("blog.home"))
     tags = Tag.objects()
     cats = Category.objects()
-    return render_template("create.html", tags=tags, cats = cats)
+    return render_template("create.html", tags=tags, cats=cats)
 
 
 @user_bp.route("/posts-list/")
@@ -95,3 +95,18 @@ def edit(post_id):
             return redirect(url_for("user.posts_list"))
 
     return render_template("edit.html", post=post)
+
+
+@login_required
+@user_bp.route("/like/<post_id>")
+def like(post_id):
+    post = Post.objects(id=post_id)[0]
+    user_id_form = session['user_id']
+    if (str(session['user_id']) not in post.likes) and (str(session['user_id']) not in post.dislikes):
+        post.likes.append(str(session['user_id']))
+    return redi
+
+@login_required
+@user_bp.route("/dislike/<post_id>")
+def dislike(post_id):
+    pass
