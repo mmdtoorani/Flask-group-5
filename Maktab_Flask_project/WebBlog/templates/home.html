@@ -5,6 +5,21 @@
 {% endblock %}
 
 {% block left_items_in_nav %}
+    {% if not g.user %}
+        <a href="{{ url_for('blog.login') }}">
+            <button type="button" class="btn navs-button">Login</button>
+        </a>
+    {% endif %}
+    {% if not g.user %}
+        <a href="{{ url_for('blog.sign_up') }}">
+            <button type="button" class="btn navs-button">Sign up</button>
+        </a>
+    {% endif %}
+    {% if g.user %}
+        <a href="{{ url_for('blog.logout') }}">
+            <button type="button" class="btn navs-button">Logout</button>
+        </a>
+    {% endif %}
     {% if g.user %}
         <a href="{{ url_for('user.create') }}">
             <button type="button" class="btn navs-button">New</button>
@@ -115,7 +130,7 @@
                 for (var obj of data) {
                     if (obj.status === 1) {
                         {#for (let i = 0; i <= data.length - 1; i++) {#}
-                            var card = `<div class="container main-content">
+                        var card = `<div class="container main-content">
                 <div class="card" style="width: 18rem;" id="card${obj['_id']}">
                     <img class="card-img-top" src="${obj['photo']}"
                          alt="${obj['photo']}">
@@ -125,10 +140,10 @@
                         </div>
                 </div>
             </div>`
-                            $('.component').append(card)
-                        }
+                        $('.component').append(card)
                     }
                 }
+            }
             //}
         });
         {#        {% endfor %}#}
