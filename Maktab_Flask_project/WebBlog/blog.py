@@ -79,7 +79,7 @@ def login():
         if error is None:
             session.clear()
             session["user_id"] = str(current_user.id)
-            print('hello1')
+            # print('hello1')
             return redirect(url_for("blog.home"))
 
         flash(error)
@@ -103,11 +103,11 @@ def category(category_id):
     posts=[]
     for cat in Category.objects:
         if cat.parent_cat:
-            print('this   ',str(cat.parent_cat.id))
+            # print('this   ',str(cat.parent_cat.id))
 
             print('that', str(cat.id))
             if str(cat.parent_cat.id) in list_of_cats:
-                print('3')
+                # print('3')
                 list_of_cats.append(str(cat.id))
 
     for post in Post.objects:
@@ -119,10 +119,10 @@ def category(category_id):
 
 @blog_bp.route("/tag-posts/<tag_id>")
 def tag(tag_id):
-    print(tag_id)
-    print(type(tag_id))
+    # print(tag_id)
+    # print(type(tag_id))
     posts = Post.objects(tags__in=[tag_id])
-    print(posts)
+    # print(posts)
     return render_template("posts_list.html", posts=posts)
 
 # if __name__ == "__main__":

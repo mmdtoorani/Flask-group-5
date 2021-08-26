@@ -33,9 +33,9 @@ def create():
         tags_form = request.form['tags']
         cat_form = request.form['category']
         cat_form = Category.objects(name = cat_form)[0].id
-        print(tags_form)
+        # print(tags_form)
         tags_form_ids = get_tags(tags_form.split(','))
-        print(tags_form_ids)
+        # print(tags_form_ids)
         fname = secure_filename(f.filename)
         f.save('WebBlog/static/img' + fname)
         image = fname
