@@ -101,12 +101,13 @@ def edit(post_id):
 @user_bp.route("/like/<post_id>")
 def like(post_id):
     post = Post.objects(id=post_id)[0]
-    user_id_form = session['user_id']
+    print(str(session['user_id']))
+    print(post.likes)
     if (str(session['user_id']) not in post.likes) and (str(session['user_id']) not in post.dislikes):
         post.likes.append(str(session['user_id']))
-    posts = Post.objects
-    return render_template("home.html", posts=posts)
-
+        post.save()
+        return redirect(url_for('blog.home'))
+    return redirect(url_for('blog.home'))
 
 @login_required
 @user_bp.route("/dislike/<post_id>")

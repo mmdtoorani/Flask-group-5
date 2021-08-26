@@ -70,11 +70,13 @@
 
                         <a href="{{ url_for('user.dislike', post_id=post.id) }}">
                             like
+                            <p>{{ post.num_of_likes }}</p>
                         </a>
 
 
                         <a href="{{ url_for('user.dislike', post_id=post.id) }}">
-                            <i class="fa fa-thumbs-down"></i>
+                            /dislike
+                            <p>{{ post.num_of_dislikes }}</p>
                         </a>
 
                     </div>
