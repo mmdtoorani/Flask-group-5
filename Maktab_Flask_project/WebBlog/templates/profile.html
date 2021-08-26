@@ -45,6 +45,23 @@
     </form>
 {% endblock %}
 
+{% block right_col %}
+    <div class="col-4">
+
+        <br><br>
+        <p>tags</p>
+        <table id="table_tag" class="table-bordered">
+
+        </table>
+        <br><br>
+        <p>categories</p>
+
+        <table id="table_cat" class="table-bordered">
+
+        </table>
+    </div>
+{% endblock %}
+
 {% block main %}
     <div class="container main-content">
         <div class="card" style="width: 18rem;" id="card{{ user.id }}">
@@ -56,9 +73,12 @@
                 <p class="card-text">Email : {{ user.email }}</p>
                 <p class="card-text">Phone number : {{ user.phone }}</p>
 
-
             </div>
         </div>
     </div>
 
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/tag_cat.js' ) }}"></script>
 {% endblock %}
