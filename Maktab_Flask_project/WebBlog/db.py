@@ -33,6 +33,14 @@ class Post(DynamicDocument):
     cat = ListField()
     tags = ListField()
 
+    @property
+    def num_of_likes(self):
+        return len(self.likes)
+
+    @property
+    def num_of_dislikes(self):
+        return len(self.dislikes)
+
 
 # Post.drop_collection()
 # Tag.drop_collection()
@@ -62,10 +70,11 @@ class Post(DynamicDocument):
 #     print(cat.parent_cat)
 #     print('----------')
 #
-# for post in Post.objects:
-#     print(post.title)
-#     print(post.tags)
-#     print('========')
+for post in Post.objects:
+    print(post.title)
+    print(post.tags)
+    print(post.num_of_likes)
+    print('========')
 # # Tag.drop_collection()
 
 # def category(category_id):
