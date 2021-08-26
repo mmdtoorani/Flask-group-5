@@ -73,7 +73,7 @@ class Post(DynamicDocument):
 for post in Post.objects:
     print(post.title)
     print(post.tags)
-    print(post.likes)
+    print(post.num_of_likes)
     print('========')
 # # Tag.drop_collection()
 

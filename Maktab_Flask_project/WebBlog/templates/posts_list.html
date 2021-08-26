@@ -55,13 +55,7 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
                     <div class="card-option">
-                        <a href="{{ url_for('user.like', post_id=post.id) }}">
-                            <i class="fa fa-thumbs-up"></i><br>
-                            <p></p>
-                        </a>
-                        <a href="{{ url_for('user.dislike', post_id=post.id) }}">
-                            <i class="fa fa-thumbs-down"></i>
-                        </a>
+
 
                         <button class="btn btn-warning btn-deactive" title="deactive"
                                 id="deactive{{ post.id }}"></button>
@@ -75,7 +69,7 @@
                     <div class="card-option">
 
                         <a href="{{ url_for('user.dislike', post_id=post.id) }}">
-                            <i class="fa fa-thumbs-up"></i>
+                            like
                         </a>
 
 

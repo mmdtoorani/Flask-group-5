@@ -107,12 +107,17 @@ def like(post_id):
     posts = Post.objects
     return render_template("home.html", posts=posts)
 
+
 @login_required
 @user_bp.route("/dislike/<post_id>")
 def dislike(post_id):
     post = Post.objects(id=post_id)[0]
-    user_id_form = session['user_id']
+    # user_id_form = session['user_id']
     if (str(session['user_id']) not in post.likes) and (str(session['user_id']) not in post.dislikes):
         post.likes.append(str(session['user_id']))
+        print(post.num_of_likes)
+        print('successful')
+        return redirect(url_for('blog.home'))
     posts = Post.objects
-    return render_template("home.html", posts=posts)
+    print('not successful')
+    return redirect(url_for('blog.home'))
