@@ -19,6 +19,25 @@
     </style>
 {% endblock %}
 
+{% block left_items_in_nav %}
+{% if g.user %}
+        <a href="{{ url_for('blog.logout') }}">
+            <button type="button" class="btn navs-button">Logout</button>
+        </a>
+    {% endif %}
+    {% if g.user %}
+        <a href="{{ url_for('user.create') }}">
+            <button type="button" class="btn navs-button">New</button>
+        </a>
+    {% endif %}
+    {% if g.user %}
+        <a href="{{ url_for('user.posts_list') }}">
+            <button type="button" class="btn navs-button">My Posts</button>
+        </a>
+    {% endif %}
+{% endblock %}
+
+
 {% block right_items_in_nav %}
     <form class="form-inline search">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
