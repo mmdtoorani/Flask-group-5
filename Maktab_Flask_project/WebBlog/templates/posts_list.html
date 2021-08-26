@@ -91,7 +91,25 @@
 
 {% endblock %}
 
+{% block right_col %}
+    <div class="col-4">
+
+        <br><br>
+        <p>tags</p>
+        <table id="table_tag" class="table-bordered">
+
+        </table>
+        <br><br>
+        <p>categories</p>
+
+        <table id="table_cat" class="table-bordered">
+
+        </table>
+    </div>
+{% endblock %}
+
 {% block js %}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/tag_cat.js' ) }}"></script>
     <script>
         {% for post in posts %}
             $('#delete{{ post.id }}').click(function () {
