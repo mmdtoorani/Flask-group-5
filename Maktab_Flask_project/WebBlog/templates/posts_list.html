@@ -48,18 +48,19 @@
 
             <div class="card mb-3" id="card{{ post.id }}">
                 {% if post.photo %}
-                <img class="card-img-top" src="{{ url_for('static', filename='/img/' + post.photo) }}"
-                     alt="{{ post.photo }}">
+                    <img class="card-img-top" src="{{ url_for('static', filename='/img/' + post.photo) }}"
+                         alt="{{ post.photo }}">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">{{ post.body }}</p>
                     <div class="card-option">
                         <a href="{{ url_for('user.like', post_id=post.id) }}">
-                            <i  class="fa fa-thumbs-up"></i><br><p>   </p>
+                            <i class="fa fa-thumbs-up"></i><br>
+                            <p></p>
                         </a>
                         <a href="{{ url_for('user.dislike', post_id=post.id) }}">
-                            <i  class="fa fa-thumbs-down"></i>
+                            <i class="fa fa-thumbs-down"></i>
                         </a>
 
                         <button class="btn btn-warning btn-deactive" title="deactive"
@@ -71,6 +72,19 @@
                         </button>
 
                     </div>
+                    <div class="card-option">
+
+                        <a href="{{ url_for('user.dislike', post_id=post.id) }}">
+                            <i class="fa fa-thumbs-up"></i>
+                        </a>
+
+
+                        <a href="{{ url_for('user.dislike', post_id=post.id) }}">
+                            <i class="fa fa-thumbs-down"></i>
+                        </a>
+
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -120,26 +134,26 @@
         {% endfor %}
     </script>
     <script>
-    function myFunction(x) {
-  x.classList.toggle("fa-thumbs-down");
-}
+        function myFunction(x) {
+            x.classList.toggle("fa-thumbs-down");
+        }
     </script>
-       <script>
+    <script>
         $("#search_btn").on('click', function () {
             var keyword = $("#search_box").val();
             console.log(keyword);
             const url = "http://127.0.0.1:5000/search/" + keyword;
             console.log(url);
             $.ajax({
-                    type: "GET",
-                    url: url,
-                    dataType: "HTML",
-                    success: function (data) {
-                        console.log(data)
+                type: "GET",
+                url: url,
+                dataType: "HTML",
+                success: function (data) {
+                    console.log(data)
 
-                        $(".main-content").html(data);
-                    },
-                });
-    });
+                    $(".main-content").html(data);
+                },
+            });
+        });
     </script>
 {% endblock %}
