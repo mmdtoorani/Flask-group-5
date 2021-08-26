@@ -104,7 +104,8 @@ def like(post_id):
     user_id_form = session['user_id']
     if (str(session['user_id']) not in post.likes) and (str(session['user_id']) not in post.dislikes):
         post.likes.append(str(session['user_id']))
-    return redi
+    posts = Post.objects
+    return render_template("home.html", posts=posts)
 
 @login_required
 @user_bp.route("/dislike/<post_id>")
