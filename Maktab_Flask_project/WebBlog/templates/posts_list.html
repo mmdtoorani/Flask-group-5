@@ -37,8 +37,8 @@
 
 {% block right_items_in_nav %}
     <form class="form-inline search">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn my-2 my-sm-0" type="button">Search</button>
+        <input class="form-control mr-sm-2" type="search" id="search_box" placeholder="Search" aria-label="Search">
+        <button class="btn my-2 my-sm-0" id="search_btn" type="button">Search</button>
     </form>
 {% endblock %}
 
@@ -110,5 +110,30 @@
                 });
             });
         {% endfor %}
+    </script>
+       <script>
+        $("#search_btn").on('click', function () {
+            var keyword = $("#search_box").val();
+            console.log(keyword);
+            const url = "http://127.0.0.1:5000/search/" + keyword;
+            console.log(url);
+            $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "HTML",
+                    success: function (data) {
+                        console.log(data)
+                        {#var innerhtml = "";#}
+                        {#for (let post of data){#}
+                        {#    console.log(post)#}
+                            {#innerhtml += "<p>"+post['body']+"</p>"#}
+                            {#innerhtml += "<p>"+post['tags']+"</p>"#}
+                        {#        #}
+                        {#}#}
+                        {##}
+                        $(".main-content").html(data);
+                    },
+                });
+    });
     </script>
 {% endblock %}

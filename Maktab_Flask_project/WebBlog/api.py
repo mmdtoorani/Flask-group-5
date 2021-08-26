@@ -92,9 +92,25 @@ def list_tags():
     return jsonify(json_tags)
 
 
-@api_bp.route("/search/")
-def search():
-    pass
+@api_bp.route("/search/<keyword>")
+def search(keyword):
+    posts = []
+    for post in Post.objects:
+        if keyword in post.tags:
+            print(post.tags)
+            # context = {
+            #     '_id': str(post.id),
+            #     'user_id': str(post.user),
+            #     'title': post.title,
+            #     'photo': post.photo,
+            #     'body': post.body,
+            #     'status': post.status,
+            #     'tags': post.tags,
+            # }
+            posts.append(post)
+
+    # json_post = json.loads(json.dumps(posts))
+    return render_template('search_ajax.html', posts=posts)
 
 
 @api_bp.route("/user-profile/<user_id>")
