@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block left_items_in_nav %}
-{% if g.user %}
+    {% if g.user %}
         <a href="{{ url_for('blog.logout') }}">
             <button type="button" class="btn navs-button">Logout</button>
         </a>
@@ -80,5 +80,5 @@
 {% endblock %}
 
 {% block js %}
-<script type="text/javascript" src="{{ url_for('static', filename='js/tag_cat.js' ) }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/tag_cat.js' ) }}"></script>
 {% endblock %}
