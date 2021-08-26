@@ -35,10 +35,30 @@
     </style>
 {% endblock %}
 
+{% block left_items_in_nav %}
+    {% if g.user %}
+        <a href="{{ url_for('blog.logout') }}">
+            <button type="button" class="btn navs-button">Logout</button>
+        </a>
+    {% endif %}
+    {% if g.user %}
+        <a href="{{ url_for('user.create') }}">
+            <button type="button" class="btn navs-button">New</button>
+        </a>
+    {% endif %}
+    {% if g.user %}
+        <a href="{{ url_for('user.profile') }}">
+            <button type="button" class="btn navs-button">My Profile</button>
+        </a>
+    {% endif %}
+{% endblock %}
+
+
+
 {% block right_items_in_nav %}
     <form class="form-inline search">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn my-2 my-sm-0" type="button">Search</button>
+        <input class="form-control mr-sm-2" type="search" id="search_box" placeholder="Search" aria-label="Search">
+        <button class="btn my-2 my-sm-0" id="search_btn" type="button">Search</button>
     </form>
 {% endblock %}
 
@@ -48,8 +68,8 @@
 
             <div class="card mb-3" id="card{{ post.id }}">
                 {% if post.photo %}
-                <img class="card-img-top" src="{{ url_for('static', filename='/img/' + post.photo) }}"
-                     alt="{{ post.photo }}">
+                    <img class="card-img-top" src="{{ url_for('static', filename='/img/' + post.photo) }}"
+                         alt="{{ post.photo }}">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ post.title }}</h5>
@@ -110,5 +130,30 @@
                 });
             });
         {% endfor %}
+    </script>
+    <script>
+        $("#search_btn").on('click', function () {
+            var keyword = $("#search_box").val();
+            console.log(keyword);
+            const url = "http://127.0.0.1:5000/search/" + keyword;
+            console.log(url);
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "HTML",
+                success: function (data) {
+                    console.log(data)
+                    {#var innerhtml = "";#}
+                    {#for (let post of data){#}
+                    {#    console.log(post)#}
+                    {#innerhtml += "<p>"+post['body']+"</p>"#}
+                    {#innerhtml += "<p>"+post['tags']+"</p>"#}
+                    {#        #}
+                    {# }#}
+                    {##}
+                    $(".main-content").html(data);
+                },
+            });
+        });
     </script>
 {% endblock %}
