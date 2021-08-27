@@ -10,11 +10,14 @@ api_bp = Blueprint('api', __name__)
 def list_post():
     posts = []
     for post in Post.objects:
+        img_name = post['photo']
+        img_path = f'static/img/{img_name}'
         context = {
             '_id': str(post.id),
             'user_id': str(post.user),
             'title': post.title,
             'photo': post.photo,
+            'img_path': img_path,
             'body': post.body,
             'status': post.status,
             'tags': post.tags,
