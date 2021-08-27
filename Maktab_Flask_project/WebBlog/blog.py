@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from WebBlog.db import User, Post, Category
 from WebBlog.LoginRequired import login_required
-from api import list_post
+# from api import list_post
 import requests
 
 blog_bp = Blueprint('blog', __name__)
@@ -36,6 +36,7 @@ def sign_up():
         email_form = request.form["email"]
         phone_form = request.form["phone"]
         password_form = request.form["password"]
+        password_form2 = request.form["password2"]
         error = None
 
         if not username_form:
@@ -43,6 +44,12 @@ def sign_up():
 
         elif not password_form:
             error = "Password is required."
+
+        elif password_form2 != password_form:
+            error = "Passwords are not same !"
+
+        elif len(password_form) < 8:
+            error = "Can not be less than 8 characters"
 
         elif User.objects(username=username_form):
             error = f"User {username_form} is already registered."
