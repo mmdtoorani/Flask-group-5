@@ -124,9 +124,8 @@ def tag(tag_id):
     # print(posts)
     return render_template("posts_list.html", posts=posts)
 
-#
-# if __name__ == "__main__":
-#     for posts in Post.objects:
-#         img_name = posts['photo']
-#         img_path = f'static/img/{img_name}'
-#         print(img_path)
+
+if __name__ == "__main__":
+    for posts in Post.objects:
+        img = posts['photo']
+        print(img)

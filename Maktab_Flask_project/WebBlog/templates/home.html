@@ -4,6 +4,16 @@
     WebBlog | Home
 {% endblock %}
 
+{% block style %}
+    <style>
+        .card img {
+            width: 100%;
+            height: 15vw;
+            object-fit: cover;
+        }
+    </style>
+{% endblock %}
+
 {% block left_items_in_nav %}
     {% if not g.user %}
         <a href="{{ url_for('blog.login') }}">
@@ -48,27 +58,38 @@
 {% endblock %}
 
 {% block right_col %}
-    <div class="col-4">
+    {% for post in posts %}
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLongTitle"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <img class="modal-img" src="{{ url_for('static', filename='/img/' + posts['photo']) }}"
+                         alt="{{ post.photo }}">
+                </div>
+            </div>
+        </div>
+        <!-- end Modal -->
+    {% endfor %}
 
+    <div class="col-4">
         <br><br>
         <p>tags</p>
-        <table id="table_tag" class="table-bordered">
-
-        </table>
+        <table id="table_tag" class="table-bordered"></table>
         <br><br>
         <p>categories</p>
-
-        <table id="table_cat" class="table-bordered">
-
-        </table>
+        <table id="table_cat" class="table-bordered"></table>
     </div>
+
 {% endblock %}
 
 {% block js %}
     <script type="text/javascript" src="{{ url_for('static', filename='js/tag_cat.js' ) }}"></script>
     <script>
-        {#        {% for post in posts %}#}
-
         var url = "http://127.0.0.1:5000/post_list";
 
         $.ajax({
@@ -81,8 +102,8 @@
                     if (obj.status === 1) {
                         {#for (let i = 0; i <= data.length - 1; i++) {#}
                         var card = `<div class="container main-content">
-                <div class="card" style="width: 18rem;" id="card${obj['_id']}">
-                    <img class="card-img-top" src="${obj['img_path']}"
+                <div class="card mb-3" id="card${obj['_id']}">
+                    <img class="card-img-top" id="${obj['_id']+0}" data-toggle="modal" data-target="#exampleModalLong" src="${obj['img_path']}"
                          alt="${obj['photo']}">
                         <div class="card-body">
                             <h5 class="card-title">${obj['title']}</h5>
@@ -94,9 +115,7 @@
                     }
                 }
             }
-            //}
         });
-        {#        {% endfor %}#}
     </script>
 {% endblock %}
 
