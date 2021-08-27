@@ -23,8 +23,10 @@ def load_logged_in_user():
 @blog_bp.route('/home')
 def home():
     if request.method == "GET":
-        for posts in Post.objects:
-            return render_template("home.html", posts=posts)
+        posts=[]
+        for post in Post.objects:
+            posts.append(post)
+        return render_template("home.html", posts=posts)
 
 
 @blog_bp.route("/signup/", methods=("GET", "POST"))
@@ -36,6 +38,7 @@ def sign_up():
         email_form = request.form["email"]
         phone_form = request.form["phone"]
         password_form = request.form["password"]
+        password_form2 = request.form["password2"]
         error = None
 
         if not username_form:
@@ -44,10 +47,16 @@ def sign_up():
         elif not password_form:
             error = "Password is required."
 
+        elif password_form2 != password_form:
+            error = "Passwords are not same !"
+
+        elif len(password_form) < 8:
+            error = "Can not be less than 8 characters"
+
         elif User.objects(username=username_form):
             error = f"User {username_form} is already registered."
 
-        if error is None:
+        if not error:
             user_created = User(username=username_form,
                                 email=email_form,
                                 first_name=first_name_form,

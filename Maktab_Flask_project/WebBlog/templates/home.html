@@ -11,6 +11,12 @@
             height: 15vw;
             object-fit: cover;
         }
+
+        .card button {
+            width: 40%;
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
     </style>
 {% endblock %}
 
@@ -76,6 +82,15 @@
 {% block js %}
     <script type="text/javascript" src="{{ url_for('static', filename='js/tag_cat.js' ) }}"></script>
     <script>
+
+        function Dislike(id) {
+            window.location.href = "http://127.0.0.1:5000/dislike/" + id;
+        }
+
+        function Like(id) {
+            window.location.href = "http://127.0.0.1:5000/like/" + id;
+        }
+
         var url = "http://127.0.0.1:5000/post_list";
 
         $.ajax({
@@ -95,7 +110,10 @@
                             <h5 class="card-title">${obj['title']}</h5>
                             <p class="card-text">${obj['body']}</p>
                         </div>
-                    <a onclick="redirectToCat_1('${obj['_id']}');" style="color: red">like</a>
+                    <dive class="like-container">
+                        <button class="btn btn-primary" onclick="Dislike('${obj['_id']}');">dislike | ${obj['num_of_dislikes']}</button>
+                        <button class="btn btn-primary" onclick="Like('${obj['_id']}');">like | ${obj['num_of_likes']}</button>
+                    </div>
                 </div>
             </div>
 
@@ -122,9 +140,6 @@
             }
             })
 
-                function redirectTo_1(id) {
-                    window.location.href = "http://127.0.0.1:5000/dislike/" + id;
-                }
     </script>
 
     <script>

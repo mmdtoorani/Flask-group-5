@@ -21,6 +21,8 @@ def list_post():
             'body': post.body,
             'status': post.status,
             'tags': post.tags,
+            'num_of_likes': post.num_of_likes,
+            'num_of_dislikes': post.num_of_dislikes
         }
         posts.append(context)
 
