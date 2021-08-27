@@ -58,23 +58,9 @@
 {% endblock %}
 
 {% block right_col %}
-    {% for post in posts %}
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLongTitle"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <img class="modal-img" src="{{ url_for('static', filename='/img/' + posts['photo']) }}"
-                         alt="{{ post.photo }}">
-                </div>
-            </div>
-        </div>
-        <!-- end Modal -->
-    {% endfor %}
+    {#    {% for post in posts %}#}
+    {# #}
+    {#    {% endfor %}#}
 
     <div class="col-4">
         <br><br>
@@ -103,22 +89,45 @@
                         {#for (let i = 0; i <= data.length - 1; i++) {#}
                         var card = `<div class="container main-content">
                 <div class="card mb-3" id="card${obj['_id']}">
-                    <img class="card-img-top" id="${obj['_id']+0}" data-toggle="modal" data-target="#exampleModalLong" src="${obj['img_path']}"
+                    <img class="card-img-top" id="${obj['_id'] + 0}" data-toggle="modal" data-target="#exampleModalLong" src="${obj['img_path']}"
                          alt="${obj['photo']}">
                         <div class="card-body">
                             <h5 class="card-title">${obj['title']}</h5>
                             <p class="card-text">${obj['body']}</p>
                         </div>
+                    <a onclick="redirectToCat_1('${obj['_id']}');" style="color: red">like</a>
                 </div>
-            </div>`
+            </div>
+
+
+            <!-- Modal -->
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLongTitle"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <img class="modal-img" src="${obj['img_path']}"
+                         alt="${obj['photo']}">
+                </div>
+            </div>
+        </div>
+        <!-- end Modal -->`
+
                         $('.component').append(card)
                     }
                 }
             }
-        });
+            })
+
+                function redirectTo_1(id) {
+                    window.location.href = "http://127.0.0.1:5000/dislike/" + id;
+                }
     </script>
 
-          <script>
+    <script>
         $("#search_btn").on('click', function () {
             var keyword = $("#search_box").val();
             console.log(keyword);
