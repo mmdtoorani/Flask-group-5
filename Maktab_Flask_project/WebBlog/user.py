@@ -103,11 +103,15 @@ def like(post_id):
     post = Post.objects(id=post_id)[0]
     print(str(session['user_id']))
     print(post.likes)
-    if (str(session['user_id']) not in post.likes) and (str(session['user_id']) not in post.dislikes):
+    if str(session['user_id']) in post.likes:# and (str(session['user_id']) not in post.dislikes):
+        post.likes.remove(str(session['user_id']))
+        post.save()
+    elif str(session['user_id']) not in post.dislikes:
         post.likes.append(str(session['user_id']))
         post.save()
         return redirect(url_for('blog.home'))
     return redirect(url_for('blog.home'))
+
 
 @login_required
 @user_bp.route("/dislike/<post_id>")
@@ -115,10 +119,11 @@ def dislike(post_id):
     post = Post.objects(id=post_id)[0]
     print(str(session['user_id']))
     print(post.dislikes)
-    if (str(session['user_id']) not in post.likes) and (str(session['user_id']) not in post.dislikes):
-        print('1')
+    if str(session['user_id']) in post.dislikes:
+        post.dislikes.remove(str(session['user_id']))
+        post.save()
+    elif str(session['user_id']) not in post.likes:
         post.dislikes.append(str(session['user_id']))
         post.save()
         return redirect(url_for('blog.home'))
-    print('2')
     return redirect(url_for('blog.home'))
