@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from WebBlog.db import User, Post, Category
 from WebBlog.LoginRequired import login_required
-from .api import list_post, STATUS
+from api import list_post
 import requests
 
 blog_bp = Blueprint('blog', __name__)
@@ -24,7 +24,6 @@ def load_logged_in_user():
 def home():
     if request.method == "GET":
         for posts in Post.objects:
-            # if posts.status == STATUS['ACTIVE']:
             return render_template("home.html", posts=posts)
 
 
@@ -100,7 +99,7 @@ def post():
 @blog_bp.route("/category-posts/<category_id>")
 def category(category_id):
     list_of_cats = [category_id]
-    posts=[]
+    posts = []
     for cat in Category.objects:
         if cat.parent_cat:
             # print('this   ',str(cat.parent_cat.id))
@@ -125,6 +124,9 @@ def tag(tag_id):
     # print(posts)
     return render_template("posts_list.html", posts=posts)
 
+#
 # if __name__ == "__main__":
-#     response = request.get(url_for(list_post))
-#     print(response)
+#     for posts in Post.objects:
+#         img_name = posts['photo']
+#         img_path = f'static/img/{img_name}'
+#         print(img_path)
