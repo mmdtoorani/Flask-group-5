@@ -2,6 +2,7 @@
 {% for post in posts %}
 
 
+
     <div class="card mb-3" id="card{{ post.id }}">
         {% if post.photo %}
         <img class="card-img-top" src="{{ url_for('static', filename='/img/' + post.photo) }}"

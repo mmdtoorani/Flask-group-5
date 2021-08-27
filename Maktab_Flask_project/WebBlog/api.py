@@ -99,8 +99,8 @@ def list_tags():
 def search(keyword):
     posts = []
     for post in Post.objects:
-        if keyword in post.tags:
-            print(post.tags)
+        if (keyword in post.tags) or (keyword in post.title) or (keyword in post.body):
+            # print(post.bod)
             # context = {
             #     '_id': str(post.id),
             #     'user_id': str(post.user),
@@ -114,6 +114,9 @@ def search(keyword):
 
     # json_post = json.loads(json.dumps(posts))
     return render_template('search_ajax.html', posts=posts)
+
+
+
 
 
 @api_bp.route("/user-profile/<user_id>")
