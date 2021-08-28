@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from WebBlog.db import User, Post, Category
 from WebBlog.LoginRequired import login_required
-from api import list_post
+# from api import list_post
 import requests
 
 blog_bp = Blueprint('blog', __name__)
