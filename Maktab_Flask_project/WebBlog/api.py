@@ -103,16 +103,6 @@ def search(keyword):
     for post in Post.objects:
         if ((keyword in post.tags) or (keyword in post.title) or (keyword in post.body)) and\
                 post.status == STATUS['ACTIVE']:
-            # print(1)
-            # context = {
-            #     '_id': str(post.id),
-            #     'user_id': str(post.user),
-            #     'title': post.title,
-            #     'photo': post.photo,
-            #     'body': post.body,
-            #     'status': post.status,
-            #     'tags': post.tags,
-            # }
             posts.append(post)
     print(posts)
     # json_post = json.loads(json.dumps(posts))
